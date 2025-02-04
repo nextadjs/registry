@@ -1,0 +1,93 @@
+{
+  "version": "1.0.0",
+  "type": "signal",
+  "name": "example-data-provider",
+  "description": "Example data provider implementation",
+  "gvl_id": 123,
+  "homepage": "https://example.com/",
+  "maintainers": ["maintainer@example.com"],
+  "contact_email": "contact@example.com",
+  "company": {
+    "name": "Example Inc.",
+    "website": "https://example.com",
+    "contact": "https://example.com/contact"
+  },
+  "capabilities": {
+    "identity": {
+      "user_sync": {
+        "methods": ["iframe", "image"],
+        "frequency": {
+          "max_syncs_per_day": 1,
+          "max_syncs_per_session": 1
+        }
+      },
+      "universal_ids": {
+        "provides": ["uid2", "ramp_id"],
+        "consumes": ["gaid", "idfa"]
+      }
+    },
+    "contextual": {
+      "page_analysis": {
+        "supported": true,
+        "features": ["keywords", "categories", "sentiment"]
+      },
+      "brand_safety": {
+        "supported": true,
+        "categories": ["adult", "alcohol", "gambling"],
+        "realtime": true,
+        "scoring": {
+          "supported": true,
+          "range": [0, 100]
+        }
+      }
+    },
+    "audience": {
+      "segments": {
+        "supported": true,
+        "taxonomy": "IAB-2.0",
+        "update_frequency": "realtime"
+      },
+      "lookalike": {
+        "supported": true,
+        "minimum_seed_size": 1000
+      }
+    },
+    "activation": {
+      "timing": {
+        "pre_auction": true,
+        "post_auction": false
+      },
+      "mode": {
+        "client_side": true,
+        "server_side": true
+      }
+    }
+  },
+  "privacy": {
+    "gdpr": {
+      "supported": true,
+      "tcf_version": ["2.0", "2.2"]
+    },
+    "ccpa": {
+      "supported": true,
+      "version": "1.0"
+    },
+    "coppa_supported": true,
+    "gpc_supported": true,
+    "first_party_data": true
+  },
+  "parameters": {
+    "required": [
+      {
+        "name": "partner_id",
+        "description": "The partner identifier"
+      }
+    ],
+    "optional": [
+      {
+        "name": "segment_ttl",
+        "description": "Time to live for segment data in seconds"
+      }
+    ]
+  }
+}
