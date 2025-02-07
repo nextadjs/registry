@@ -21,7 +21,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@bidders/*": ["bidders/*"]
+      "@bidders/*": ["bidders/*"],
+      "@measurements/*": ["measurements/*"]
     }
   },
   "include": ["**/*.ts"],
