@@ -32,13 +32,15 @@ export class Measurement {
     url: string,
     callbackFn: () => Promise<void> | void
   ) {
-    try {
-      await this.scriptLoader.load(url);
-      // TODO: サードパーティ関係のイベント発火
-      await callbackFn();
-      // TODO: サードパーティ関係のコールバック済みイベント発火
-    } catch (error) {
-      // TODO: エラーハンドリング
-    }
+    this.on("client:DOMContentLoaded", async () => {
+      try {
+        await this.scriptLoader.load(url);
+        // TODO: サードパーティ関係のイベント発火
+        await callbackFn();
+        // TODO: サードパーティ関係のコールバック済みイベント発火
+      } catch (error) {
+        // TODO: エラーハンドリング
+      }
+    });
   }
 }

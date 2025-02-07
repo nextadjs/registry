@@ -6,6 +6,7 @@ export interface MeasurementEvent<T = Record<string, unknown>> {
 
 export interface MeasurementEventMap {
   init: MeasurementEvent<void>;
+  "client:DOMContentLoaded": MeasurementEvent<void>;
 }
 
 export type MeasurementEventType = keyof MeasurementEventMap;
