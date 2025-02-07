@@ -25,8 +25,3 @@ export type BidderSpec = BidderModule;
 export type BidderModule = {
   v26: IBidderDecorator<V26BidRequest, V26BidRequest>;
 };
-
-export interface Bidder {
-  config: BidderConfig;
-  modules: BidderModule;
-}
