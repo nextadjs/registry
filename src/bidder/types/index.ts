@@ -1,13 +1,18 @@
 import type { Runtime } from "@/types";
-import type { V26BidRequest } from "@/types/openrtb";
-
-export type BidderRuntime = "client" | "server";
+import type { OpenRTBVersion, V26BidRequest } from "@/types/openrtb";
 
 // TODO: JSON Schemaで型補完
 // TODO: version関係の整え
 export type BidderConfig = {
   name: string;
+  capabilities: BidderCapabilities;
+};
+
+export type BidderCapabilities = {
   runtime: Runtime[];
+  openrtb: {
+    supported_version: OpenRTBVersion[];
+  }
 };
 
 export interface IBidderDecorator<Req, Res> {
