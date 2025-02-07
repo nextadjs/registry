@@ -2,8 +2,8 @@ import type { BidderConfig, BidderSpec } from "./types";
 
 export class Bidder {
   public constructor(
-    private _config: BidderConfig,
-    private _spec: BidderSpec
+    private readonly _config: BidderConfig,
+    private readonly _spec: BidderSpec
   ) {}
 
   public get config(): BidderConfig {
