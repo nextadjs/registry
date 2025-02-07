@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      iab-openrtb:
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       typescript:
         specifier: ^5.7.3
@@ -14,11 +18,25 @@ importers:
 
 packages:
 
+  iab-adcom@1.0.0:
+    resolution: {integrity: sha512-4X20M9nZrdSv6vJ0nHJxYZi3Kh2su8Gc1w+n3yPcOdHnAdhJ2yBwXhg3asCoPtPg6uCzqvPAnq/iDiptI+LwUw==}
+    engines: {node: '>=14.0.0'}
+
+  iab-openrtb@1.0.0:
+    resolution: {integrity: sha512-Pcs9wl4Jg5tDFPFi3IcAskaLbTjSHaVdlvWDVZkwfqVtqHSaF8i+4DoE14AOhBERLLy0p69AcWMHycFSHRxg/g==}
+    engines: {node: '>=14.0.0'}
+
   typescript@5.7.3:
     resolution: {integrity: sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
 snapshots:
+
+  iab-adcom@1.0.0: {}
+
+  iab-openrtb@1.0.0:
+    dependencies:
+      iab-adcom: 1.0.0
 
   typescript@5.7.3: {}

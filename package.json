@@ -10,5 +10,8 @@
   "license": "MIT",
   "devDependencies": {
     "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "iab-openrtb": "^1.0.0"
   }
 }
