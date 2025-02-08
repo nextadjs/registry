@@ -1,7 +1,7 @@
 {
   "name": "example",
   "capabilities": {
-    "runtime": ["server", "client"],
+    "runtime": ["client"],
     "openrtb": {
       "supported_version": ["v2.6"]
     }

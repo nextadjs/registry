@@ -1,5 +1,10 @@
 import type { Runtime } from "@/types";
-import type { OpenRTBVersion, V26BidRequest } from "@/types/openrtb";
+import type {
+  OpenRTBVersion,
+  V26Bid,
+  V26BidRequest,
+  V26Imp,
+} from "@/types/openrtb";
 
 // TODO: JSON Schemaで型補完
 // TODO: version関係の整え
@@ -12,16 +17,42 @@ export type BidderCapabilities = {
   runtime: Runtime[];
   openrtb: {
     supported_version: OpenRTBVersion[];
-  }
+    supported_media: {
+      banner: boolean;
+      video: boolean;
+      native: boolean;
+      audio: boolean;
+      multi_format: boolean;
+    };
+  };
 };
 
-export interface IBidderDecorator<Req, Res> {
-  decorateRequest(request: Req): Promise<Req>;
-  decorateResponse(response: Res): Promise<Res>;
+export type CustomParams = Record<string, unknown>;
+
+export type RequestDetails = {
+  endpoint: string;
+  headers?: HeadersInit;
+  cache?: RequestCache;
+  credentials?: RequestCredentials;
+  mode?: RequestMode;
+};
+
+export interface OpenRTBSpec<Req, Imp, Res, Bid, CustomParams> {
+  configureRequestDetails(params: CustomParams): RequestDetails;
+  decorateBidRequest?(request: Req, params: CustomParams): Promise<Req>;
+  decorateImpression?(impression: Imp, params: CustomParams): Promise<Imp>;
+  decorateBidResponse?(response: Res, params: CustomParams): Promise<Res>;
+  decorateBid?(bid: Bid, params: CustomParams): Promise<Bid>;
 }
 
-export type BidderSpec = BidderModule;
-
-export type BidderModule = {
-  v26: IBidderDecorator<V26BidRequest, V26BidRequest>;
+export type BidderSpec = {
+  openrtb: {
+    v26: OpenRTBSpec<
+      V26BidRequest,
+      V26Imp,
+      V26BidRequest,
+      V26Bid,
+      CustomParams
+    >;
+  };
 };
