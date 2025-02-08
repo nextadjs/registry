@@ -1,4 +1,4 @@
-import type { Runtime } from "@/types";
+import type { CustomParams, Runtime } from "@/types";
 import type {
   OpenRTBVersion,
   V26Bid,
@@ -27,8 +27,6 @@ export type BidderCapabilities = {
   };
 };
 
-export type CustomParams = Record<string, unknown>;
-
 export type RequestDetails = {
   endpoint: string;
   headers?: HeadersInit;
@@ -37,7 +35,7 @@ export type RequestDetails = {
   mode?: RequestMode;
 };
 
-export interface OpenRTBSpec<Req, Imp, Res, Bid, CustomParams> {
+export interface BidderOpenRTBSpec<Req, Imp, Res, Bid, CustomParams> {
   configureRequestDetails(params: CustomParams): RequestDetails;
   decorateBidRequest?(request: Req, params: CustomParams): Promise<Req>;
   decorateImpression?(impression: Imp, params: CustomParams): Promise<Imp>;
@@ -47,7 +45,7 @@ export interface OpenRTBSpec<Req, Imp, Res, Bid, CustomParams> {
 
 export type BidderSpec = {
   openrtb: {
-    v26: OpenRTBSpec<
+    v26: BidderOpenRTBSpec<
       V26BidRequest,
       V26Imp,
       V26BidRequest,
