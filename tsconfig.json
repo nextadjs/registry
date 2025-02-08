@@ -22,7 +22,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@bidders/*": ["bidders/*"],
-      "@measurements/*": ["measurements/*"]
+      "@measurements/*": ["measurements/*"],
+      "@compliances/*": ["compliances/*"]
     }
   },
   "include": ["**/*.ts"],
