@@ -1,4 +1,4 @@
-import { createMeasurement } from "@/measurements/create-measurement";
+import { createMeasurement } from "@/measurement/create-measurement";
 import config from "./measurement.json";
 
 const measurement = await createMeasurement(config.name);
