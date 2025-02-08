@@ -6,7 +6,7 @@ import type {
 } from "./types";
 
 export abstract class Signal<T = void> {
-  private _name: string;
+  private readonly _name: string;
   private _asyncCollections: AsyncCollectionMethod[] = [];
   private _metadata: SignalMetadata;
   protected _data: T | null = null;
