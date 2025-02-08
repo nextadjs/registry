@@ -3,7 +3,7 @@ import type { EventEmitter } from "./event-emitter";
 import type { MeasurementConfig } from "./types";
 import type { MeasurementEventMap, MeasurementEventType } from "./types/event";
 
-export class Measurement {
+export class Measurement {   
   public constructor(
     private readonly _config: MeasurementConfig,
     private readonly eventEmitter: EventEmitter,
@@ -20,14 +20,15 @@ export class Measurement {
   ) {
     this.eventEmitter.addEventListener(eventType, callbackFn);
   }
-
+    
   public off<T extends MeasurementEventType>(
     eventType: T,
     callbackFn: (data: MeasurementEventMap[T]) => void
   ) {
-    this.eventEmitter.addEventListener(eventType, callbackFn);
+    this.eventEmitter.removeEventListener(eventType, callbackFn);
   }
 
+  // TODO: 広告枠情報を渡してあげると親切かも
   public async registerThirdPartyScript(
     url: string,
     callbackFn: () => Promise<void> | void
