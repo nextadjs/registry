@@ -1,7 +1,7 @@
-import { Signal } from "@/signal";
+import { Identity } from "@/signal";
 import type { BidRequest } from "iab-openrtb/v26";
 
-class UserSyncSignal extends Signal {
+class UserSync extends Identity {
   public async collect(): Promise<void> {
     this.scheduleAsyncCollection("iframe", {
       url: "https://example.com",
@@ -14,4 +14,4 @@ class UserSyncSignal extends Signal {
   }
 }
 
-export default UserSyncSignal;
+export default UserSync;
