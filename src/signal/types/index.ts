@@ -1,5 +1,8 @@
+export type SignalType = "identity" | "contextual" | "audience" | "delivery";
+
 export type SignalConfig = {
   name: string;
+  type: SignalType;
 };
 
 export type AsyncCollectionMethod = {
@@ -7,7 +10,7 @@ export type AsyncCollectionMethod = {
   status: boolean;
   config: {
     url: string;
-    trigger: "immediate" | "load" | "idle" | 'DOMContentLoaded' | "custom";
+    trigger: "immediate" | "load" | "idle" | "DOMContentLoaded" | "custom";
     timeout?: number;
     position?: "head" | "body";
     customTrigger?: () => Promise<boolean>;
