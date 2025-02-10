@@ -7,12 +7,13 @@ import type {
 
 export abstract class Signal<T = void> {
   private readonly _name: string;
-  private _asyncCollections: AsyncCollectionMethod[] = [];
+  private _asyncCollections: AsyncCollectionMethod[];
   private _metadata: SignalMetadata;
   protected _data: T | null = null;
 
-  public constructor(config: SignalConfig) {
+  public constructor(config: SignalConfig, asyncCollections: AsyncCollectionMethod[]) {
     this._name = config.name;
+    this._asyncCollections = asyncCollections;
     this._metadata = {
       name: this.name,
       config: config,
