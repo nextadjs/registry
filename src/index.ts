@@ -1,4 +1,4 @@
-import type { Bidder } from "@/bidder/types";
+import type { Bidder } from "@/bidder";
 import { Registry } from "@/core/registry";
 
 export const bidderRegistry = new Registry<Bidder>();

@@ -13,5 +13,15 @@
   },
   "dependencies": {
     "iab-openrtb": "^1.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    },
+    "./bidders": {
+      "import": "./bidders/index.ts",
+      "types": "./bidders/index.ts"
+    }
   }
 }
