@@ -35,12 +35,12 @@ export type RequestDetails = {
   mode?: RequestMode;
 };
 
-export interface BidderOpenRTBSpec<Req, Imp, Res, Bid, CustomParams> {
-  configureRequestDetails(params: CustomParams): RequestDetails;
-  decorateBidRequest?(request: Req, params: CustomParams): Promise<Req>;
-  decorateImpression?(impression: Imp, params: CustomParams): Promise<Imp>;
-  decorateBidResponse?(response: Res, params: CustomParams): Promise<Res>;
-  decorateBid?(bid: Bid, params: CustomParams): Promise<Bid>;
+export interface BidderOpenRTBSpec<TReq, TImp, TRes, TBid, TCustomParams> {
+  configureRequestDetails(params: TCustomParams): RequestDetails;
+  decorateBidRequest?(request: TReq, params: TCustomParams): Promise<TReq>;
+  decorateImpression?(impression: TImp, params: TCustomParams): Promise<TImp>;
+  decorateBidResponse?(response: TRes, params: TCustomParams): Promise<TRes>;
+  decorateBid?(bid: TBid, params: TCustomParams): Promise<TBid>;
 }
 
 export type BidderSpec = {
