@@ -5,7 +5,7 @@ import type {
   SignalMetadata,
 } from "./types";
 
-export abstract class Signal<T = void> {
+export abstract class Signal<T = void, TOptions = Record<string, unknown>> {
   private readonly _name: string;
   private _asyncCollections: AsyncCollectionMethod[];
   private _metadata: SignalMetadata;
@@ -40,9 +40,9 @@ export abstract class Signal<T = void> {
     this._asyncCollections = asyncCollections;
   }
 
-  public async initialize(): Promise<void> {
+  public async initialize(options: TOptions): Promise<void> {
     try {
-      this._data = await this.collect();
+      this._data = await this.collect(options);
       this.active();
     } catch (error) {
       this.error();
@@ -50,7 +50,8 @@ export abstract class Signal<T = void> {
     }
   }
 
-  public abstract collect(): Promise<T>;
+  // フリークエンシーとかキャッシュとかのオプション？ヘルパー？用意してあげると便利そう
+  public abstract collect(options: TOptions): Promise<T>;
 
   protected scheduleAsyncCollection(
     type: AsyncCollectionMethod["type"],
