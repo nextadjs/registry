@@ -22,6 +22,18 @@
     "./bidders": {
       "import": "./bidders/index.ts",
       "types": "./bidders/index.ts"
+    },
+    "./measurements": {
+      "import": "./measurements/index.ts",
+      "types": "./measurements/index.ts"
+    },
+    "./signals": {
+      "import": "./signals/index.ts",
+      "types": "./signals/index.ts"
+    },
+    "./compliances": {
+      "import": "./compliances/index.ts",
+      "types": "./compliances/index.ts"
     }
   }
 }
