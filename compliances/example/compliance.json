@@ -1,0 +1,9 @@
+{
+  "name": "example",
+  "capabilities": {
+    "runtime": ["client"],
+    "openrtb": {
+      "supported_version": ["v2.6"]
+    }
+  }
+}
