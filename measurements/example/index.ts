@@ -11,3 +11,5 @@ measurement.registerThirdPartyScript(
   "https://example.com/third-party-script.js",
   () => {}
 );
+
+export default measurement;
