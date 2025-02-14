@@ -1,10 +1,10 @@
-import type { Bidder } from "@/bidder";
+import type { Buyer } from "@/buyer";
 import { Registry } from "@/core/registry";
 import type { Signal } from "./signal";
 import { Measurement } from "./measurement";
 import { Compliance } from "./compliance";
 
-export const bidderRegistry = new Registry<Bidder>();
+export const buyerRegistry = new Registry<Buyer>();
 
 export const signalRegistry = new Registry<Signal>();
 

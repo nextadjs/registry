@@ -8,12 +8,12 @@ import type {
 
 // TODO: JSON Schemaで型補完
 // TODO: version関係の整え
-export type BidderConfig = {
+export type BuyerConfig = {
   name: string;
-  capabilities: BidderCapabilities;
+  capabilities: BuyerCapabilities;
 };
 
-export type BidderCapabilities = {
+export type BuyerCapabilities = {
   runtime: Runtime[];
   openrtb: {
     supported_version: OpenRTBVersion[];
@@ -35,7 +35,7 @@ export type RequestDetails = {
   mode?: RequestMode;
 };
 
-export interface BidderOpenRTBSpec<TReq, TImp, TRes, TBid, TCustomParams> {
+export interface BuyerOpenRTBSpec<TReq, TImp, TRes, TBid, TCustomParams> {
   configureRequestDetails(params: TCustomParams): RequestDetails;
   decorateBidRequest?(request: TReq, params: TCustomParams): Promise<TReq>;
   decorateImpression?(impression: TImp, params: TCustomParams): Promise<TImp>;
@@ -43,9 +43,9 @@ export interface BidderOpenRTBSpec<TReq, TImp, TRes, TBid, TCustomParams> {
   decorateBid?(bid: TBid, params: TCustomParams): Promise<TBid>;
 }
 
-export type BidderSpec = {
+export type BuyerSpec = {
   openrtb: {
-    v26: BidderOpenRTBSpec<
+    v26: BuyerOpenRTBSpec<
       V26BidRequest,
       V26Imp,
       V26BidRequest,

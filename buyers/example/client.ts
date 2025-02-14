@@ -1,7 +1,7 @@
-import type { BidderSpec } from "@/bidder/types";
+import type { BuyerSpec } from "@/buyer/types";
 import type { CustomParams } from "./types";
 
-const spec: BidderSpec = {
+const spec: BuyerSpec = {
   openrtb: {
     v26: {
       configureRequestDetails: (params: CustomParams) => {
