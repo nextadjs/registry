@@ -11,12 +11,12 @@ export type SignalConfig = {
 
 export interface ClientSignalSpec<
   TDefaultParams extends DefaultParams = DefaultParams,
-  TData = unknown,
+  TData = unknown
 > extends SignalSpec<ClientAsyncCollect, TData, TDefaultParams> {}
 
 export interface ServerSignalSpec<
   TDefaultParams extends DefaultParams = DefaultParams,
-  TData = unknown,
+  TData = unknown
 > extends SignalSpec<ServerAsyncCollect, TData, TDefaultParams> {}
 
 export interface SignalSpec<
@@ -27,8 +27,8 @@ export interface SignalSpec<
   collect: (
     params: TDefaultParams
   ) => Promise<CollectResult<TData, TAsyncCollect>>;
-  openrtb: {
-    v26: SignalOpenRTB2Spec<
+  openrtb?: {
+    v26?: SignalOpenRTB2Spec<
       V26BidRequest,
       V26Imp,
       V26BidRequest,
@@ -41,7 +41,7 @@ export interface SignalSpec<
 
 export type CollectResult<T, TAsyncCollect> = {
   data: T;
-  asyncCollections: TAsyncCollect[];
+  asyncCollections: Omit<TAsyncCollect, "status">[];
 };
 
 export interface SignalOpenRTB2Spec<

@@ -19,8 +19,8 @@ export type ComplianceCapabilities = {};
 export type ComplianceSpec<
   TDefaultParams extends DefaultParams = DefaultParams
 > = {
-  openrtb: {
-    v26: ComplianceOpenRTB2Spec<
+  openrtb?: {
+    v26?: ComplianceOpenRTB2Spec<
       V26BidRequest,
       V26Imp,
       V26BidRequest,
