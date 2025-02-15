@@ -1,6 +1,6 @@
 import type { BuyerComplianceSpec } from "@/compliance/types";
 import type { ClientSignalSpec, ServerSignalSpec } from "@/signal/types";
-import type { DefaultParams, Runtime } from "@/types";
+import type { Context, DefaultParams, Runtime } from "@/types";
 import type {
   OpenRTBVersion,
   V26Bid,
@@ -17,6 +17,7 @@ export type BuyerConfig = {
 
 export type BuyerCapabilities = {
   runtime: Runtime[];
+  context: Context[];
   openrtb: {
     supported_version: OpenRTBVersion[];
     supported_media: {

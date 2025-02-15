@@ -1,5 +1,10 @@
 {
   "name": "example",
-  "type": "identity",
-  "runtime": ["client"]
+  "capabilities": {
+    "type": "identity",
+    "runtime": ["client"],
+    "openrtb": {
+      "supported_version": ["v2.6"]
+    }
+  }
 }

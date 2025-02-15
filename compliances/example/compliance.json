@@ -2,6 +2,7 @@
   "name": "example",
   "capabilities": {
     "runtime": ["client"],
+    "context": ["site"],
     "openrtb": {
       "supported_version": ["v2.6"]
     }

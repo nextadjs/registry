@@ -1,4 +1,4 @@
-import type { DefaultParams } from "@/types";
+import type { Context, DefaultParams, Runtime } from "@/types";
 import type { V26Bid, V26BidRequest, V26Imp } from "@/types/openrtb";
 
 export type ComplianceConfig = {
@@ -14,7 +14,10 @@ export type Regulations = {
   gppSectionIds?: number[];
 };
 
-export type ComplianceCapabilities = {};
+export type ComplianceCapabilities = {
+  context: Context[];
+  runtime: Runtime[];
+};
 
 export type ComplianceSpec<
   TDefaultParams extends DefaultParams = DefaultParams
