@@ -1,7 +1,8 @@
 import { createMeasurement } from "@/measurement";
 import config from "./measurement.json";
+import type { Params } from "./types";
 
-const measurement = await createMeasurement(config.name);
+const measurement = await createMeasurement<Params>(config.name);
 
 measurement.on("init", () => {
   console.log("init!!!!!!!!");
