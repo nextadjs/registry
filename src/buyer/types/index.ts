@@ -28,7 +28,7 @@ export type BuyerCapabilities = {
 };
 
 export type RequestDetails = {
-  endpoint: string;
+  url: string;
   headers?: HeadersInit;
   cache?: RequestCache;
   credentials?: RequestCredentials;
