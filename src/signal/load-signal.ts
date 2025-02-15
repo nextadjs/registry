@@ -20,4 +20,7 @@ export const loadSignal = async (name: string, runtime: Runtime) => {
     const config = await import(`@signals/${name}/signal.json`);
     return new ClientSignal(config, spec);
   }
+
+  throw new Error();
 };
+
