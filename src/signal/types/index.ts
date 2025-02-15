@@ -66,6 +66,7 @@ export interface SignalOpenRTB2Spec<
   decorateBid?(bid: TBid, params: TCustomParams, data: TData): Promise<TBid>;
 }
 
+export type AsyncCollect = ServerAsyncCollect | ClientAsyncCollect;
 export type ServerAsyncCollect = SimpleAsyncCollect;
 export type ClientAsyncCollect = SimpleAsyncCollect | CustomAsyncCollect;
 

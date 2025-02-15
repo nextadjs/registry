@@ -1,6 +1,6 @@
 import type {
   BaseAsyncCollect,
-  ServerAsyncCollect,
+  AsyncCollect,
   SignalConfig,
   SignalMetadata,
   SignalSpec,
@@ -8,7 +8,7 @@ import type {
 import type { CustomParams } from "@/types";
 
 export abstract class Signal<
-  TAsyncCollect extends BaseAsyncCollect = ServerAsyncCollect,
+  TAsyncCollect extends BaseAsyncCollect = AsyncCollect,
   TData = unknown,
   TParams = CustomParams
 > {
