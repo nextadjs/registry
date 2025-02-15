@@ -1,15 +1,34 @@
-import type { BuyerSpec } from "@/buyer/types";
-import type { CustomParams } from "./types";
+import type { ClientBuyerSpec } from "@/buyer/types";
+import type { Params } from "./types";
 
-const spec: BuyerSpec = {
+const spec: ClientBuyerSpec<Params> = {
+  signals: [
+    {
+      name: "user-sync",
+      spec: {
+        collect: async (params) => {
+          return {
+            data: null,
+            asyncCollections: [
+              {
+                type: "iframe",
+                url: "https://example.com/url",
+                trigger: "idle",
+              },
+            ],
+          };
+        },
+      },
+    },
+  ],
   openrtb: {
     v26: {
-      configureRequestDetails: (params: CustomParams) => {
+      configureRequestDetails: (params) => {
         return {
           url: "https://example.com/endpoint",
         };
       },
-      decorateBidRequest: async (bidRequest, params: CustomParams) => {
+      decorateBidRequest: async (bidRequest, params) => {
         return bidRequest;
       },
     },

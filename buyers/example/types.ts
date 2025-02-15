@@ -1,9 +1,8 @@
-export type CustomParams = CommonParams & SpecificParams;
+import type { DefaultParams } from "@/types";
 
-export type CommonParams = {
+
+// TODO: 広告ユニットとかの固有パラメーターの扱い
+
+export interface Params extends DefaultParams {
   siteId: number;
-};
-
-export type SpecificParams = {
-  placementId: number;
-};
+}

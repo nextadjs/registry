@@ -1,4 +1,6 @@
-import type { CustomParams, Runtime } from "@/types";
+import type { BuyerComplianceSpec } from "@/compliance/types";
+import type { ClientSignalSpec, ServerSignalSpec } from "@/signal/types";
+import type { DefaultParams, Runtime } from "@/types";
 import type {
   OpenRTBVersion,
   V26Bid,
@@ -35,22 +37,58 @@ export type RequestDetails = {
   mode?: RequestMode;
 };
 
-export type BuyerSpec<TCustomParams = unknown> = {
-  openrtb: {
+export type BuyerSpec = ClientBuyerSpec | ServerBuyerSpec;
+
+export type ClientBuyerSpec<TParams extends DefaultParams = DefaultParams> = {
+  signals?: {
+    name: string;
+    spec: ClientSignalSpec<TParams, unknown>;
+  }[];
+  compliances?: {
+    name: string;
+    spec: BuyerComplianceSpec<TParams>;
+  }[];
+  openrtb?: {
     v26: BuyerOpenRTB2Spec<
       V26BidRequest,
       V26Imp,
       V26BidRequest,
       V26Bid,
-      TCustomParams
+      TParams
     >;
   };
 };
 
-export interface BuyerOpenRTB2Spec<TReq, TImp, TRes, TBid, TCustomParams> {
-  configureRequestDetails(params: TCustomParams): RequestDetails;
-  decorateBidRequest?(request: TReq, params: TCustomParams): Promise<TReq>;
-  decorateImpression?(impression: TImp, params: TCustomParams): Promise<TImp>;
-  decorateBidResponse?(response: TRes, params: TCustomParams): Promise<TRes>;
-  decorateBid?(bid: TBid, params: TCustomParams): Promise<TBid>;
+export type ServerBuyerSpec<TParams extends DefaultParams = DefaultParams> = {
+  signals: {
+    name: string;
+    spec: ServerSignalSpec<TParams, unknown>;
+  }[];
+  compliances?: {
+    name: string;
+    spec: BuyerComplianceSpec;
+  }[];
+  openrtb?: {
+    v26?: BuyerOpenRTB2Spec<
+      V26BidRequest,
+      V26Imp,
+      V26BidRequest,
+      V26Bid,
+      TParams
+    >;
+  };
+};
+
+export interface BuyerOpenRTB2Spec<
+  TReq,
+  TImp,
+  TRes,
+  TBid,
+  TParams extends DefaultParams
+> {
+  configureRequestDetails(params: TParams): RequestDetails;
+  decorateBidRequest?(request: TReq, params: TParams): Promise<TReq>;
+  decorateImpression?(impression: TImp, params: TParams): Promise<TImp>;
+  decorateBidResponse?(response: TRes, params: TParams): Promise<TRes>;
+  decorateBid?(bid: TBid, params: TParams): Promise<TBid>;
 }
