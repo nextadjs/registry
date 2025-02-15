@@ -6,23 +6,67 @@ export type ComplianceConfig = {
   capabilities: ComplianceCapabilities;
 };
 
+export type Regulations = {
+  coppa: boolean;
+  gdpr: boolean;
+  usPrivacy: string;
+  gpp: string;
+  gppSectionIds?: number[];
+};
+
 export type ComplianceCapabilities = {};
 
-export interface ComplianceOpenRTBSpec<TReq, TImp, TRes, TBid, TCustomParams = CustomParams> {
-  validateBidRequest?(request: TReq, params: TCustomParams): Promise<TReq>;
-  validateImpression?(impression: TImp, params: TCustomParams): Promise<TImp>;
-  validateBidResponse?(response: TRes, params: TCustomParams): Promise<TRes>;
-  validateBid?(bid: TBid, params: TCustomParams): Promise<TBid>;
-}
-
-export type ComplianceSpec = {
+export type ComplianceSpec<TCustomParams = unknown> = {
   openrtb: {
-    v26: ComplianceOpenRTBSpec<
+    v26: ComplianceOpenRTB2Spec<
       V26BidRequest,
       V26Imp,
       V26BidRequest,
       V26Bid,
-      CustomParams
+      TCustomParams
     >;
   };
 };
+
+export type BuyerComplianceSpec<TCustomParams = unknown> = {
+  determineRestrictedSignals: (
+    regulations: Regulations,
+    params: TCustomParams
+  ) => Promise<string[]>;
+};
+
+export type SignalComplianceSpec<TCustomParams = unknown> = {
+  validate: (
+    regulations: Regulations,
+    params: TCustomParams
+  ) => Promise<boolean>;
+};
+
+export interface ComplianceOpenRTB2Spec<
+  TReq,
+  TImp,
+  TRes,
+  TBid,
+  TCustomParams = CustomParams
+> {
+  validateBidRequest?(
+    request: TReq,
+    params: TCustomParams,
+    regulations: Regulations
+  ): Promise<TReq>;
+  validateImpression?(
+    impression: TImp,
+    params: TCustomParams,
+    regulations: Regulations
+  ): Promise<TImp>;
+  validateBidResponse?(
+    response: TRes,
+    params: TCustomParams,
+    regulations: Regulations
+  ): Promise<TRes>;
+  validateBid?(
+    bid: TBid,
+    params: TCustomParams,
+    regulations: Regulations
+  ): Promise<TBid>;
+}
