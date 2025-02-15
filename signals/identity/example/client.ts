@@ -1,7 +1,7 @@
 import type { ClientSignalSpec } from "@/signal/types";
-import type { Options } from "./types";
+import type { Data, Params } from "./types";
 
-const spec: ClientSignalSpec = {
+const spec: ClientSignalSpec<Params, Data> = {
   collect: async () => {
     return {
       data: null,
@@ -10,7 +10,7 @@ const spec: ClientSignalSpec = {
   },
   openrtb: {
     v26: {
-      decorateBidRequest: async (bidRequest, params: Options) => {
+      decorateBidRequest: async (bidRequest, params: Params) => {
         return bidRequest;
       },
     },

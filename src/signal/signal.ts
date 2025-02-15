@@ -5,12 +5,12 @@ import type {
   SignalMetadata,
   SignalSpec,
 } from "./types";
-import type { CustomParams } from "@/types";
+import type { DefaultParams } from "@/types";
 
 export abstract class Signal<
   TAsyncCollect extends BaseAsyncCollect = AsyncCollect,
   TData = unknown,
-  TParams = CustomParams
+  TParams extends DefaultParams = DefaultParams
 > {
   private _metadata: SignalMetadata;
 

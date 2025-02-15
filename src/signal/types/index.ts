@@ -1,4 +1,4 @@
-import type { CustomParams, Runtime } from "@/types";
+import type { DefaultParams, Runtime } from "@/types";
 import type { V26Bid, V26BidRequest, V26Imp } from "@/types/openrtb";
 
 export type SignalType = "identity" | "contextual" | "audience" | "delivery";
@@ -9,19 +9,23 @@ export type SignalConfig = {
   runtime: Runtime[];
 };
 
-export interface ClientSignalSpec<TData = unknown, TCustomParams = CustomParams>
-  extends SignalSpec<ClientAsyncCollect, TData, TCustomParams> {}
+export interface ClientSignalSpec<
+  TDefaultParams extends DefaultParams = DefaultParams,
+  TData = unknown,
+> extends SignalSpec<ClientAsyncCollect, TData, TDefaultParams> {}
 
-export interface ServerSignalSpec<TData = unknown, TCustomParams = CustomParams>
-  extends SignalSpec<ServerAsyncCollect, TData, TCustomParams> {}
+export interface ServerSignalSpec<
+  TDefaultParams extends DefaultParams = DefaultParams,
+  TData = unknown,
+> extends SignalSpec<ServerAsyncCollect, TData, TDefaultParams> {}
 
 export interface SignalSpec<
   TAsyncCollect extends BaseAsyncCollect,
-  TData,
-  TCustomParams
+  TData = unknown,
+  TDefaultParams extends DefaultParams = DefaultParams
 > {
   collect: (
-    params: TCustomParams
+    params: TDefaultParams
   ) => Promise<CollectResult<TData, TAsyncCollect>>;
   openrtb: {
     v26: SignalOpenRTB2Spec<
@@ -29,7 +33,7 @@ export interface SignalSpec<
       V26Imp,
       V26BidRequest,
       V26Bid,
-      TCustomParams,
+      TDefaultParams,
       TData
     >;
   };
@@ -45,25 +49,25 @@ export interface SignalOpenRTB2Spec<
   TImp,
   TRes,
   TBid,
-  TCustomParams,
+  TDefaultParams extends DefaultParams,
   TData
 > {
   decorateBidRequest?(
     request: TReq,
-    params: TCustomParams,
+    params: TDefaultParams,
     data: TData
   ): Promise<TReq>;
   decorateImpression?(
     impression: TImp,
-    params: TCustomParams,
+    params: TDefaultParams,
     data: TData
   ): Promise<TImp>;
   decorateBidResponse?(
     response: TRes,
-    params: TCustomParams,
+    params: TDefaultParams,
     data: TData
   ): Promise<TRes>;
-  decorateBid?(bid: TBid, params: TCustomParams, data: TData): Promise<TBid>;
+  decorateBid?(bid: TBid, params: TDefaultParams, data: TData): Promise<TBid>;
 }
 
 export type AsyncCollect = ServerAsyncCollect | ClientAsyncCollect;
