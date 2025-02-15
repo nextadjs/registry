@@ -1,9 +1,7 @@
 import { Identity } from "@/signal";
 import type { BidRequest } from "iab-openrtb/v26";
 
-type Options = {
-  syncType: "iframe" | "pixel";
-};
+
 
 class UserSync extends Identity {
   public async collect(options: Options): Promise<void> {

@@ -1,4 +1,5 @@
 {
   "name": "example",
-  "type": "identity"
+  "type": "identity",
+  "runtime": ["client"]
 }
