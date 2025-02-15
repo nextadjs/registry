@@ -35,22 +35,22 @@ export type RequestDetails = {
   mode?: RequestMode;
 };
 
-export interface BuyerOpenRTBSpec<TReq, TImp, TRes, TBid, TCustomParams> {
+export type BuyerSpec<TCustomParams = unknown> = {
+  openrtb: {
+    v26: BuyerOpenRTB2Spec<
+      V26BidRequest,
+      V26Imp,
+      V26BidRequest,
+      V26Bid,
+      TCustomParams
+    >;
+  };
+};
+
+export interface BuyerOpenRTB2Spec<TReq, TImp, TRes, TBid, TCustomParams> {
   configureRequestDetails(params: TCustomParams): RequestDetails;
   decorateBidRequest?(request: TReq, params: TCustomParams): Promise<TReq>;
   decorateImpression?(impression: TImp, params: TCustomParams): Promise<TImp>;
   decorateBidResponse?(response: TRes, params: TCustomParams): Promise<TRes>;
   decorateBid?(bid: TBid, params: TCustomParams): Promise<TBid>;
 }
-
-export type BuyerSpec = {
-  openrtb: {
-    v26: BuyerOpenRTBSpec<
-      V26BidRequest,
-      V26Imp,
-      V26BidRequest,
-      V26Bid,
-      CustomParams
-    >;
-  };
-};
