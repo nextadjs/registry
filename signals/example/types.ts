@@ -2,4 +2,4 @@ export type Params = {
   syncType: "iframe" | "pixel";
 };
 
-export type Data = unknown;
+export type Data = string;

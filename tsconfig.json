@@ -23,7 +23,8 @@
       "@/*": ["src/*"],
       "@buyers/*": ["buyers/*"],
       "@measurements/*": ["measurements/*"],
-      "@compliances/*": ["compliances/*"]
+      "@compliances/*": ["compliances/*"],
+      "@signals/*": ["signals/*"]
     }
   },
   "include": ["**/*.ts"],

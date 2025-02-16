@@ -1,3 +1,4 @@
+import type { Context } from "iab-adcom/context";
 import type {
   BaseAsyncCollect,
   AsyncCollect,
@@ -13,16 +14,28 @@ export abstract class Signal<
   TParams extends DefaultParams = DefaultParams
 > {
   private _metadata: SignalMetadata;
+  private _data!: TData;
+  private _asyncCollects: TAsyncCollect[];
 
   public constructor(
     private readonly _config: SignalConfig,
     private readonly _spec: SignalSpec<TAsyncCollect, TData, TParams>
   ) {
+    this._asyncCollects = [];
     this._metadata = {
       name: _config.name,
       status: "pending",
       lastUpdated: Date.now(),
     };
+  }
+
+  public async initialize(params: TParams, context: Context) {
+    const collectResult = await this._spec.collect(params, context);
+    this._data = collectResult.data;
+    this._asyncCollects = collectResult.asyncCollections.map(asyncCollection => ({
+      ...asyncCollection,
+      status: false,
+    })) as TAsyncCollect[];
   }
 
   public get config(): SignalConfig {
@@ -34,8 +47,5 @@ export abstract class Signal<
       ...this._metadata,
     };
   }
-
-  public get spec(): SignalSpec<TAsyncCollect, TData, TParams> {
-    return this._spec;
-  }
 }
+

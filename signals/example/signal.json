@@ -2,7 +2,7 @@
   "name": "example",
   "capabilities": {
     "type": "identity",
-    "runtime": ["client"],
+    "runtime": ["client", "server"],
     "openrtb": {
       "supported_version": ["v2.6"]
     }
