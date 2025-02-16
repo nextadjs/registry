@@ -9,3 +9,5 @@ export * from './buyer';
 export * from './measurement';
 export * from './compliance';
 export * from './types';
+export * from './types/adcom';
+export * from './types/openrtb';
