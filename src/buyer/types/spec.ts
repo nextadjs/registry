@@ -11,6 +11,11 @@ import type {
   V26Imp,
   V26SiteContextBidRequest,
 } from "@/types/openrtb";
+import type {
+  ContextWithApp,
+  ContextWithDooh,
+  ContextWithSite,
+} from "@/types/adcom";
 
 export type BuyerSpec = ClientBuyerSpec | ServerBuyerSpec;
 
@@ -19,10 +24,18 @@ export interface ClientBuyerSpec<
 > {
   signals?: ClientBuyerSignal<TParams>[];
   compliances?: ClientBuyerCompliance<TParams>[];
-  openrtb?: BuyerOpenRTBSpec<TParams, V26BidRequest>;
-  site?: BuyerMediaContextSpec<TParams, V26SiteContextBidRequest>;
-  app?: BuyerMediaContextSpec<TParams, V26AppContextBidRequest>;
-  dooh?: BuyerMediaContextSpec<TParams, V26DoohContextBidRequest>;
+  openrtb?: BuyerOpenRTBSpec<TParams, AdCOMContext, V26BidRequest>;
+  site?: BuyerMediaContextSpec<
+    TParams,
+    ContextWithSite,
+    V26SiteContextBidRequest
+  >;
+  app?: BuyerMediaContextSpec<TParams, ContextWithApp, V26AppContextBidRequest>;
+  dooh?: BuyerMediaContextSpec<
+    TParams,
+    ContextWithDooh,
+    V26DoohContextBidRequest
+  >;
 }
 
 export interface ClientBuyerSignal<TParams extends DefaultParams> {
@@ -37,6 +50,7 @@ export interface ClientBuyerCompliance<TParams extends DefaultParams> {
 
 export interface BuyerOpenRTBSpec<
   TParams extends DefaultParams,
+  TContext extends AdCOMContext,
   TV26BidRequest extends V26BidRequest
 > {
   v26: BuyerOpenRTB2Spec<
@@ -44,17 +58,19 @@ export interface BuyerOpenRTBSpec<
     V26Imp,
     V26BidResponse,
     V26Bid,
-    TParams
+    TParams,
+    TContext
   >;
 }
 
 export interface BuyerMediaContextSpec<
   TParams extends DefaultParams,
+  TContext extends AdCOMContext,
   TV26BidRequest extends V26BidRequest
 > {
   signals?: ClientBuyerSignal<TParams>[];
   compliances?: ClientBuyerCompliance<TParams>[];
-  openrtb?: BuyerOpenRTBSpec<TParams, TV26BidRequest>;
+  openrtb?: BuyerOpenRTBSpec<TParams, TContext, TV26BidRequest>;
 }
 
 export interface ServerBuyerSpec<
@@ -62,10 +78,18 @@ export interface ServerBuyerSpec<
 > {
   signals?: ServerBuyerSignal<TParams>[];
   compliances?: ServerBuyerCompliance<TParams>[];
-  openrtb?: BuyerOpenRTBSpec<TParams, V26BidRequest>;
-  site?: BuyerMediaContextSpec<TParams, V26SiteContextBidRequest>;
-  app?: BuyerMediaContextSpec<TParams, V26AppContextBidRequest>;
-  dooh?: BuyerMediaContextSpec<TParams, V26DoohContextBidRequest>;
+  openrtb?: BuyerOpenRTBSpec<TParams, AdCOMContext, V26BidRequest>;
+  site?: BuyerMediaContextSpec<
+    TParams,
+    ContextWithSite,
+    V26SiteContextBidRequest
+  >;
+  app?: BuyerMediaContextSpec<TParams, ContextWithApp, V26AppContextBidRequest>;
+  dooh?: BuyerMediaContextSpec<
+    TParams,
+    ContextWithDooh,
+    V26DoohContextBidRequest
+  >;
 }
 
 export interface ServerBuyerSignal<TParams extends DefaultParams> {
@@ -83,32 +107,26 @@ export interface BuyerOpenRTB2Spec<
   TImp,
   TRes,
   TBid,
-  TParams extends DefaultParams
+  TParams extends DefaultParams,
+  TContext extends AdCOMContext
 > {
-  configureRequestDetails(
-    params: TParams,
-    context: AdCOMContext
-  ): RequestDetails;
+  configureRequestDetails(params: TParams, context: TContext): RequestDetails;
   decorateBidRequest?(
     request: TReq,
     params: TParams,
-    context: AdCOMContext
+    context: TContext
   ): Promise<TReq>;
   decorateImpression?(
     impression: TImp,
     params: TParams,
-    context: AdCOMContext
+    context: TContext
   ): Promise<TImp>;
   decorateBidResponse?(
     response: TRes,
     params: TParams,
-    context: AdCOMContext
+    context: TContext
   ): Promise<TRes>;
-  decorateBid?(
-    bid: TBid,
-    params: TParams,
-    context: AdCOMContext
-  ): Promise<TBid>;
+  decorateBid?(bid: TBid, params: TParams, context: TContext): Promise<TBid>;
 }
 
 export interface RequestDetails {
