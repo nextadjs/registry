@@ -12,6 +12,7 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
+    "iab-adcom": "^1.0.5",
     "iab-openrtb": "^1.0.0"
   },
   "exports": {
