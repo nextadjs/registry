@@ -18,7 +18,6 @@ export type BuyerCapabilities = {
       video: boolean;
       native: boolean;
       audio: boolean;
-      multi_format: boolean;
     };
   };
 };
