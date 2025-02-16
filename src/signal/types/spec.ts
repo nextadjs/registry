@@ -1,4 +1,5 @@
 import type { DefaultParams } from "@/types";
+import type { Context as AdCOMContext } from "iab-adcom/context";
 import type {
   V26AppContextBidRequest,
   V26Bid,
@@ -11,37 +12,43 @@ import type {
 
 export interface ClientSignalSpec<
   TParams extends DefaultParams = DefaultParams,
-  TData = unknown
-> extends SignalSpec<ClientAsyncCollect, TData, TParams> {}
+  TData = unknown,
+  TContext extends AdCOMContext = AdCOMContext
+> extends SignalSpec<ClientAsyncCollect, TData, TParams, TContext> {}
 
 export interface ServerSignalSpec<
   TParams extends DefaultParams = DefaultParams,
-  TData = unknown
-> extends SignalSpec<ServerAsyncCollect, TData, TParams> {}
+  TData = unknown,
+  TContext extends AdCOMContext = AdCOMContext
+> extends SignalSpec<ServerAsyncCollect, TData, TParams, TContext> {}
 
 export interface SignalSpec<
   TAsyncCollect extends BaseAsyncCollect,
   TData = unknown,
-  TParams extends DefaultParams = DefaultParams
+  TParams extends DefaultParams = DefaultParams,
+  TContext extends AdCOMContext = AdCOMContext
 > {
-  collect: SignalCollect<TAsyncCollect, TData, TParams>;
-  openrtb?: SignalOpenRTBSpec<TParams, TData, V26BidRequest>;
+  collect: SignalCollect<TAsyncCollect, TData, TParams, TContext>;
+  openrtb?: SignalOpenRTBSpec<TParams, TData, TContext, V26BidRequest>;
   site?: SignalMediaContextSpec<
     TAsyncCollect,
     TData,
     TParams,
+    TContext,
     V26SiteContextBidRequest
   >;
   app?: SignalMediaContextSpec<
     TAsyncCollect,
     TData,
     TParams,
+    TContext,
     V26AppContextBidRequest
   >;
   dooh?: SignalMediaContextSpec<
     TAsyncCollect,
     TData,
     TParams,
+    TContext,
     V26DoohContextBidRequest
   >;
 }
@@ -50,21 +57,27 @@ export interface SignalMediaContextSpec<
   TAsyncCollect extends BaseAsyncCollect,
   TData,
   TParams extends DefaultParams,
+  TContext extends AdCOMContext,
   TV26BidRequest extends V26BidRequest
 > {
-  collect: SignalCollect<TAsyncCollect, TData, TParams>;
-  openrtb?: SignalOpenRTBSpec<TParams, TData, TV26BidRequest>;
+  collect: SignalCollect<TAsyncCollect, TData, TParams, TContext>;
+  openrtb?: SignalOpenRTBSpec<TParams, TData, TContext, TV26BidRequest>;
 }
 
 export type SignalCollect<
   TAsyncCollect extends BaseAsyncCollect,
   TData = unknown,
-  TParams extends DefaultParams = DefaultParams
-> = (params: TParams) => Promise<CollectResult<TData, TAsyncCollect>>;
+  TParams extends DefaultParams = DefaultParams,
+  TContext extends AdCOMContext = AdCOMContext
+> = (
+  params: TParams,
+  context: TContext
+) => Promise<CollectResult<TData, TAsyncCollect>>;
 
 export type SignalOpenRTBSpec<
   TParams extends DefaultParams,
   TData,
+  TContext extends AdCOMContext,
   TV26BidRequest extends V26BidRequest
 > = {
   v26: SignalOpenRTB2Spec<
@@ -73,7 +86,8 @@ export type SignalOpenRTBSpec<
     V26BidResponse,
     V26Bid,
     TParams,
-    TData
+    TData,
+    TContext
   >;
 };
 
@@ -88,24 +102,33 @@ export interface SignalOpenRTB2Spec<
   TRes,
   TBid,
   TParams extends DefaultParams,
-  TData
+  TData,
+  TContext extends AdCOMContext
 > {
   decorateBidRequest?(
     request: TReq,
     params: TParams,
-    data: TData
+    data: TData,
+    context: TContext
   ): Promise<TReq>;
   decorateImpression?(
     impression: TImp,
     params: TParams,
-    data: TData
+    data: TData,
+    context: TContext
   ): Promise<TImp>;
   decorateBidResponse?(
     response: TRes,
     params: TParams,
-    data: TData
+    data: TData,
+    context: TContext
   ): Promise<TRes>;
-  decorateBid?(bid: TBid, params: TParams, data: TData): Promise<TBid>;
+  decorateBid?(
+    bid: TBid,
+    params: TParams,
+    data: TData,
+    context: TContext
+  ): Promise<TBid>;
 }
 
 export type AsyncCollect = ServerAsyncCollect | ClientAsyncCollect;
