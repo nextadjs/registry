@@ -1,4 +1,5 @@
 import type { DefaultParams } from "@/types";
+import type { Context as AdCOMContext } from "iab-adcom/context";
 import type { Regulations } from ".";
 import type {
   V26AppContextBidRequest,
@@ -10,15 +11,19 @@ import type {
   V26SiteContextBidRequest,
 } from "@/types/openrtb";
 
-export interface ComplianceSpec<TParams extends DefaultParams = DefaultParams> {
-  openrtb?: ComplianceOpenRTBSpec<TParams, V26BidRequest>;
-  site?: ComplianceMediaContextSpec<TParams, V26SiteContextBidRequest>;
-  app?: ComplianceMediaContextSpec<TParams, V26AppContextBidRequest>;
-  dooh?: ComplianceMediaContextSpec<TParams, V26DoohContextBidRequest>;
+export interface ComplianceSpec<
+  TParams extends DefaultParams = DefaultParams,
+  TContext extends AdCOMContext = AdCOMContext
+> {
+  openrtb?: ComplianceOpenRTBSpec<TParams, TContext, V26BidRequest>;
+  site?: ComplianceMediaContextSpec<TParams, TContext, V26SiteContextBidRequest>;
+  app?: ComplianceMediaContextSpec<TParams, TContext, V26AppContextBidRequest>;
+  dooh?: ComplianceMediaContextSpec<TParams, TContext, V26DoohContextBidRequest>;
 }
 
 export interface ComplianceOpenRTBSpec<
   TParams extends DefaultParams,
+  TContext extends AdCOMContext,
   TV26BidRequest extends V26BidRequest
 > {
   v26?: ComplianceOpenRTB2Spec<
@@ -26,32 +31,38 @@ export interface ComplianceOpenRTBSpec<
     V26Imp,
     V26BidResponse,
     V26Bid,
-    TParams
+    TParams,
+    TContext
   >;
 }
 
 export interface ComplianceMediaContextSpec<
   TParams extends DefaultParams,
+  TContext extends AdCOMContext,
   TV26BidRequest extends V26BidRequest
 > {
-  openrtb?: ComplianceOpenRTBSpec<TParams, TV26BidRequest>;
+  openrtb?: ComplianceOpenRTBSpec<TParams, TContext, TV26BidRequest>;
 }
 
 export interface BuyerComplianceSpec<
-  TDefaultParams extends DefaultParams = DefaultParams
+  TParams extends DefaultParams = DefaultParams,
+  TContext extends AdCOMContext = AdCOMContext
 > {
   determineRestrictedSignals: (
     regulations: Regulations,
-    params: TDefaultParams
+    params: TParams,
+    context: TContext
   ) => Promise<string[]>;
 }
 
 export interface SignalComplianceSpec<
-  TDefaultParams extends DefaultParams = DefaultParams
+  TParams extends DefaultParams = DefaultParams,
+  TContext extends AdCOMContext = AdCOMContext
 > {
   validate: (
     regulations: Regulations,
-    params: TDefaultParams
+    params: TParams,
+    context: TContext
   ) => Promise<boolean>;
 }
 
@@ -60,26 +71,31 @@ export interface ComplianceOpenRTB2Spec<
   TImp,
   TRes,
   TBid,
-  TDefaultParams = DefaultParams
+  TParams extends DefaultParams = DefaultParams,
+  TContext extends AdCOMContext = AdCOMContext
 > {
   validateBidRequest?(
     request: TReq,
-    params: TDefaultParams,
-    regulations: Regulations
+    params: TParams,
+    regulations: Regulations,
+    context: TContext
   ): Promise<TReq>;
   validateImpression?(
     impression: TImp,
-    params: TDefaultParams,
-    regulations: Regulations
+    params: TParams,
+    regulations: Regulations,
+    context: TContext
   ): Promise<TImp>;
   validateBidResponse?(
     response: TRes,
-    params: TDefaultParams,
-    regulations: Regulations
+    params: TParams,
+    regulations: Regulations,
+    context: TContext
   ): Promise<TRes>;
   validateBid?(
     bid: TBid,
-    params: TDefaultParams,
-    regulations: Regulations
+    params: TParams,
+    regulations: Regulations,
+    context: TContext
   ): Promise<TBid>;
 }
