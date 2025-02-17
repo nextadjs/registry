@@ -1,7 +1,7 @@
 import type { BuyerComplianceSpec } from "@/compliance/types";
 import type { ClientSignalSpec, ServerSignalSpec } from "@/signal/types";
 import type { DefaultParams } from "@/types";
-import type { Context as AdCOMContext } from "iab-adcom/context";
+import type { AdCOMContext } from "@/types/adcom";
 import type {
   V26AppContextBidRequest,
   V26Bid,

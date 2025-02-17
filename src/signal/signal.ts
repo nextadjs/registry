@@ -1,4 +1,4 @@
-import type { Context } from "iab-adcom/context";
+import type { AdCOMContext } from "@/types/adcom";
 import type {
   BaseAsyncCollect,
   AsyncCollect,
@@ -29,7 +29,7 @@ export abstract class Signal<
     };
   }
 
-  public async initialize(params: TParams, context: Context) {
+  public async initialize(params: TParams, context: AdCOMContext) {
     const collectResult = await this._spec.collect(params, context);
     this._data = collectResult.data;
     this._asyncCollects = collectResult.asyncCollections.map(asyncCollection => ({

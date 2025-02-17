@@ -1,5 +1,5 @@
 import type { DefaultParams } from "@/types";
-import type { Context as AdCOMContext } from "iab-adcom/context";
+import type { AdCOMContext } from "@/types/adcom";
 import type { Regulations } from ".";
 import type {
   V26AppContextBidRequest,
