@@ -1,16 +1,7 @@
-import { createMeasurement } from "@/measurement";
+import { measurementRegistry } from "@/index";
 import config from "./measurement.json";
-import type { Params } from "./types";
+import { loadMeasurement } from "@/measurement/load-measurement";
 
-const measurement = await createMeasurement<Params>(config.name);
-
-measurement.on("init", () => {
-  console.log("init!!!!!!!!");
-});
-
-measurement.registerThirdPartyScript(
-  "https://example.com/third-party-script.js",
-  () => {}
+measurementRegistry.register(config.name, (runtime) =>
+  loadMeasurement(config.name, runtime)
 );
-
-export default measurement;
