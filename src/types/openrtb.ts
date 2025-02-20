@@ -1,11 +1,20 @@
-
-
 import type {
-  BidRequest as V26BidRequest,
+  BidRequest as V26BaseBidRequest,
   Site as V26Site,
+  Imp as V26BaseImp,
 } from "iab-openrtb/v26";
 
 export type OpenRTBVersion = "v2.6";
+
+export interface V26BidRequest extends V26BaseBidRequest {
+  imp: V26Imp[];
+}
+
+export interface V26Imp extends V26BaseImp {
+  ext?: Record<string, unknown> & {
+    gpid?: string;
+  };
+}
 
 export interface V26SiteContextBidRequest extends V26BidRequest {
   app: never;
@@ -28,6 +37,4 @@ export interface V26DoohContextBidRequest extends V26BidRequest {
 export type {
   BidResponse as V26BidResponse,
   Bid as V26Bid,
-  BidRequest as V26BidRequest,
-  Imp as V26Imp,
 } from "iab-openrtb/v26";
