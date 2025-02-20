@@ -13,6 +13,13 @@ export interface V26BidRequest extends V26BaseBidRequest {
 export interface V26Imp extends V26BaseImp {
   ext?: Record<string, unknown> & {
     gpid?: string;
+    data?: {
+      pbadslot?: string;
+      adserver?: {
+        name?: string;
+        adslot?: string;
+      }
+    }
   };
 }
 
