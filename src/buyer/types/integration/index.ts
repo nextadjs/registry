@@ -1,9 +1,9 @@
 import type { DefaultParams } from "@/types";
 import type {
   AdCOMContext,
-  ContextWithApp,
-  ContextWithDooh,
-  ContextWithSite,
+  AdCOMContextWithApp,
+  AdCOMContextWithDooh,
+  AdCOMContextWithSite,
 } from "@/types/adcom";
 import type { BuyerOpenRTBIntegration } from "./openrtb";
 
@@ -14,13 +14,13 @@ export interface BuyerClientIntegration<T extends DefaultParams> {
   openrtb?: BuyerOpenRTBIntegration<T, AdCOMContext>;
   context?: {
     site?: {
-      openrtb: BuyerOpenRTBIntegration<T, ContextWithSite>;
+      openrtb: BuyerOpenRTBIntegration<T, AdCOMContextWithSite>;
     };
     app?: {
-      openrtb: BuyerOpenRTBIntegration<T, ContextWithApp>;
+      openrtb: BuyerOpenRTBIntegration<T, AdCOMContextWithApp>;
     };
     dooh?: {
-      openrtb: BuyerOpenRTBIntegration<T, ContextWithDooh>;
+      openrtb: BuyerOpenRTBIntegration<T, AdCOMContextWithDooh>;
     };
   };
 }
@@ -29,13 +29,13 @@ export interface BuyerServerIntegration<T extends DefaultParams> {
   openrtb?: BuyerOpenRTBIntegration<T, AdCOMContext>;
   context?: {
     site?: {
-      openrtb?: BuyerOpenRTBIntegration<T, ContextWithSite>;
+      openrtb?: BuyerOpenRTBIntegration<T, AdCOMContextWithSite>;
     };
     app?: {
-      openrtb?: BuyerOpenRTBIntegration<T, ContextWithApp>;
+      openrtb?: BuyerOpenRTBIntegration<T, AdCOMContextWithApp>;
     };
     dooh?: {
-      openrtb?: BuyerOpenRTBIntegration<T, ContextWithDooh>;
+      openrtb?: BuyerOpenRTBIntegration<T, AdCOMContextWithDooh>;
     };
   };
 }

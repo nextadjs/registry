@@ -1,4 +1,4 @@
-import type { App, Context, Dooh, Site } from "iab-adcom/context";
+import type { App, Context, Dooh, Regs, Site } from "iab-adcom/context";
 import type { Ad } from "iab-adcom/media";
 import type { Placement } from "iab-adcom/placement";
 
@@ -8,21 +8,29 @@ export interface AdCOMPlacement extends Placement {
   tagid: string;
 }
 
-export type AdCOMContext = ContextWithSite | ContextWithApp | ContextWithDooh;
+export type AdCOMContext = AdCOMContextWithSite | AdCOMContextWithApp | AdCOMContextWithDooh;
 
-export interface ContextWithSite extends Context {
+export interface AdCOMContextWithSite extends Context {
   site: Site;
   dooh: never;
   app: never;
 }
-export interface ContextWithApp extends Context {
+export interface AdCOMContextWithApp extends Context {
   site: never;
   dooh: never;
   app: App;
 }
 
-export interface ContextWithDooh extends Context {
+export interface AdCOMContextWithDooh extends Context {
   site: never;
   dooh: Dooh;
   app: never;
+}
+
+export interface AdCOMRegs extends Regs {
+  ext: Record<string, unknown> & {
+    us_privacy?: string;
+    gpp?: string;
+    gpp_sid?: number[];
+  };
 }

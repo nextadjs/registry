@@ -1,9 +1,9 @@
 import type { DefaultParams } from "@/types";
 import type {
   AdCOMContext,
-  ContextWithApp,
-  ContextWithDooh,
-  ContextWithSite,
+  AdCOMContextWithApp,
+  AdCOMContextWithDooh,
+  AdCOMContextWithSite,
 } from "@/types/adcom";
 import type { SignalOpenRTBIntegration } from "./openrtb";
 
@@ -14,13 +14,13 @@ export interface SignalClientIntegration<T extends DefaultParams> {
   openrtb?: SignalOpenRTBIntegration<T, AdCOMContext>;
   context?: {
     site?: {
-      openrtb: SignalOpenRTBIntegration<T, ContextWithSite>;
+      openrtb: SignalOpenRTBIntegration<T, AdCOMContextWithSite>;
     };
     app?: {
-      openrtb: SignalOpenRTBIntegration<T, ContextWithApp>;
+      openrtb: SignalOpenRTBIntegration<T, AdCOMContextWithApp>;
     };
     dooh?: {
-      openrtb: SignalOpenRTBIntegration<T, ContextWithDooh>;
+      openrtb: SignalOpenRTBIntegration<T, AdCOMContextWithDooh>;
     };
   };
 }
@@ -29,13 +29,13 @@ export interface SignalServerIntegration<T extends DefaultParams> {
   openrtb?: SignalOpenRTBIntegration<T, AdCOMContext>;
   context?: {
     site?: {
-      openrtb?: SignalOpenRTBIntegration<T, ContextWithSite>;
+      openrtb?: SignalOpenRTBIntegration<T, AdCOMContextWithSite>;
     };
     app?: {
-      openrtb?: SignalOpenRTBIntegration<T, ContextWithApp>;
+      openrtb?: SignalOpenRTBIntegration<T, AdCOMContextWithApp>;
     };
     dooh?: {
-      openrtb?: SignalOpenRTBIntegration<T, ContextWithDooh>;
+      openrtb?: SignalOpenRTBIntegration<T, AdCOMContextWithDooh>;
     };
   };
 }
