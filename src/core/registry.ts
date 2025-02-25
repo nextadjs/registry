@@ -1,7 +1,8 @@
 import type { LoaderFn, Runtime, UserConfig } from "@/types";
+import type { AdCOMContext } from "@/types/adcom";
 
 export class Registry<T> {
-  private modules = new Map<string, LoaderFn<T>>();
+  private modules = new Map<string, LoaderFn<T00>>();
 
   public register(name: string, loader: LoaderFn<T>) {
     this.modules.set(name, loader);

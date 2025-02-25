@@ -1,19 +1,29 @@
-import type { Runtime } from "@/types";
-import type { BuyerSpec, BuyerUserConfig, ClientBuyerSpec, ServerBuyerSpec } from "./types";
-import { Buyer } from "./buyer";
+import type { DefaultParams, Runtime } from "@/types";
+import type { BuyerServerIntegration, BuyerUserConfig } from "./types";
 import { ServerBuyer } from "./server-buyer";
+import type { AdCOMContext } from "@/types/adcom";
 import { ClientBuyer } from "./client-buyer";
 
-export const loadBuyer = async (name: string, runtime: Runtime, userConfig: BuyerUserConfig) => {
+export const loadBuyer = async <
+  T1 extends DefaultParams,
+  T2 extends AdCOMContext
+>(
+  name: string,
+  runtime: Runtime,
+  context: T2,
+  userConfig: BuyerUserConfig<T1>
+) => {
   // TODO: 適切なエラーハンドリング
-  if (runtime === 'server') {
-    const spec = (await import(`@buyers/${name}/server`)).default as ServerBuyerSpec;
+  if (runtime === "server") {
+    const integration = (await import(`@buyers/${name}/server`))
+      .default as BuyerServerIntegration<T1>;
     const config = await import(`@buyers/${name}/buyer.json`);
-    return new ServerBuyer(config, spec, userConfig);
-  } else if (runtime === 'client') {
-    const spec = (await import(`@buyers/${name}/client`)).default as ClientBuyerSpec;
+    return new ServerBuyer(config, userConfig, context, integration);
+  } else if (runtime === "client") {
+    const integration = (await import(`@buyers/${name}/client`))
+      .default as BuyerServerIntegration<T1>;
     const config = await import(`@buyers/${name}/buyer.json`);
-    return new ClientBuyer(config, userConfig, spec);
+    return new ClientBuyer(config, userConfig, context, integration);
   }
 
   throw new Error();

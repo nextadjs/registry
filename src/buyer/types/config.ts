@@ -31,7 +31,7 @@ export interface BuyerCapabilities {
   };
 }
 
-export interface BuyerUserConfig<TParams extends DefaultParams = DefaultParams>
+export interface BuyerUserConfig<T extends DefaultParams = DefaultParams>
   extends UserConfig {
-  params: TParams;
+  params: T;
 }

@@ -47,4 +47,5 @@ export interface V26DoohContextBidRequest extends V26BaseBidRequest {
 export type {
   BidResponse as V26BidResponse,
   Bid as V26Bid,
+  SeatBid as V26SeatBid
 } from "iab-openrtb/v26";
