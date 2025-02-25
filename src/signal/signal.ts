@@ -5,21 +5,24 @@ import type {
   SignalConfig,
   SignalMetadata,
   SignalSpec,
+  SignalUserConfig,
 } from "./types";
 import type { DefaultParams } from "@/types";
+import type { SignalSpecWrapper } from "./types/spec-wrapper";
 
 export abstract class Signal<
   TAsyncCollect extends BaseAsyncCollect = AsyncCollect,
   TData = unknown,
   TParams extends DefaultParams = DefaultParams
 > {
-  private _metadata: SignalMetadata;
-  private _data!: TData;
-  private _asyncCollects: TAsyncCollect[];
+  protected _metadata: SignalMetadata;
+  protected _data!: TData;
+  protected _asyncCollects: TAsyncCollect[];
 
   public constructor(
-    private readonly _config: SignalConfig,
-    private readonly _spec: SignalSpec<TAsyncCollect, TData, TParams>
+    protected readonly _config: SignalConfig,
+    protected readonly _userConfig: SignalUserConfig<TParams>,
+    protected readonly _spec: SignalSpec<TAsyncCollect, TData, TParams>
   ) {
     this._asyncCollects = [];
     this._metadata = {
@@ -47,5 +50,7 @@ export abstract class Signal<
       ...this._metadata,
     };
   }
+
+  public abstract spec(): SignalSpecWrapper<TAsyncCollect, TData>;
 }
 

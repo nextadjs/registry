@@ -8,20 +8,20 @@ export interface AdCOMPlacement extends Placement {
   tagid: string;
 }
 
-export interface AdCOMContext extends Context {}
+export type AdCOMContext = ContextWithSite | ContextWithApp | ContextWithDooh;
 
-export interface ContextWithSite extends AdCOMContext {
+export interface ContextWithSite extends Context {
   site: Site;
   dooh: never;
   app: never;
 }
-export interface ContextWithApp extends AdCOMContext {
+export interface ContextWithApp extends Context {
   site: never;
   dooh: never;
   app: App;
 }
 
-export interface ContextWithDooh extends AdCOMContext {
+export interface ContextWithDooh extends Context {
   site: never;
   dooh: Dooh;
   app: never;

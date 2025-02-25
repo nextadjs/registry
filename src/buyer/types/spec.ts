@@ -50,10 +50,10 @@ export interface ClientBuyerCompliance<TParams extends DefaultParams> {
 
 export interface BuyerOpenRTBSpec<
   TParams extends DefaultParams,
-  TContext extends AdCOMContext,
+  TContext extends AdCOMContext, 
   TV26BidRequest extends V26BidRequest
 > {
-  v26: BuyerOpenRTB2Spec<
+  v26?: BuyerOpenRTB2Spec<
     TV26BidRequest,
     V26Imp,
     V26BidResponse,

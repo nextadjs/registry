@@ -1,4 +1,4 @@
-import type { Context, Runtime } from "@/types";
+import type { Context, DefaultParams, Runtime } from "@/types";
 import type {
   OpenRTBVersion,
 } from "@/types/openrtb";
@@ -23,4 +23,8 @@ export type SignalCapabilities = {
       audio: boolean;
     };
   };
+};
+
+export interface SignalUserConfig<TParams extends DefaultParams> {
+  params: TParams;
 };

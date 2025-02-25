@@ -6,10 +6,10 @@ import type {
 
 export type OpenRTBVersion = "v2.6";
 
-export interface V26BidRequest extends V26BaseBidRequest {
-  imp: V26Imp[];
-}
-
+export type V26BidRequest =
+  | V26SiteContextBidRequest
+  | V26AppContextBidRequest
+  | V26DoohContextBidRequest;
 export interface V26Imp extends V26BaseImp {
   ext?: Record<string, unknown> & {
     gpid?: string;
@@ -18,27 +18,30 @@ export interface V26Imp extends V26BaseImp {
       adserver?: {
         name?: string;
         adslot?: string;
-      }
-    }
+      };
+    };
   };
 }
 
-export interface V26SiteContextBidRequest extends V26BidRequest {
+export interface V26SiteContextBidRequest extends V26BaseBidRequest {
   app: never;
   dooh: never;
   site: V26Site;
+  imp: V26Imp[];
 }
 
-export interface V26AppContextBidRequest extends V26BidRequest {
+export interface V26AppContextBidRequest extends V26BaseBidRequest {
   app: never;
   dooh: never;
   site: V26Site;
+  imp: V26Imp[];
 }
 
-export interface V26DoohContextBidRequest extends V26BidRequest {
+export interface V26DoohContextBidRequest extends V26BaseBidRequest {
   app: never;
   dooh: never;
   site: V26Site;
+  imp: V26Imp[];
 }
 
 export type {

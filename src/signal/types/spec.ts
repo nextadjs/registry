@@ -9,7 +9,6 @@ import type {
   V26Imp,
   V26SiteContextBidRequest,
 } from "@/types/openrtb";
-
 export interface ClientSignalSpec<
   TParams extends DefaultParams = DefaultParams,
   TData = unknown,
@@ -80,7 +79,7 @@ export type SignalOpenRTBSpec<
   TContext extends AdCOMContext,
   TV26BidRequest extends V26BidRequest
 > = {
-  v26: SignalOpenRTB2Spec<
+  v26?: SignalOpenRTB2Spec<
     TV26BidRequest,
     V26Imp,
     V26BidResponse,
