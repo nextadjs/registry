@@ -1,30 +1,37 @@
-import type { Context, DefaultParams, Runtime } from "@/types";
 import type {
-  OpenRTBVersion,
-} from "@/types/openrtb";
+  Context,
+  DefaultParams,
+  Runtime,
+  TradeMethod,
+  UserConfig,
+} from "@/types";
+import type { OpenRTBVersion } from "@/types/openrtb";
 
-export type SignalType = "identity" | "contextual" | "audience" | "delivery";
-
-export type SignalConfig = {
+// TODO: JSON Schemaで型補完
+// TODO: version関係の整え
+export interface SignalConfig {
   name: string;
   capabilities: SignalCapabilities;
-};
+}
 
-export type SignalCapabilities = {
-  type: SignalType;
+export interface SignalCapabilities {
   runtime: Runtime[];
   context: Context[];
-  openrtb: {
-    supported_version: OpenRTBVersion[];
-    supported_media: {
-      banner: boolean;
-      video: boolean;
-      native: boolean;
-      audio: boolean;
+  trade: {
+    supported_method: TradeMethod[];
+    openrtb?: {
+      supported_version: OpenRTBVersion[];
+      supported_media: {
+        banner: boolean;
+        video: boolean;
+        native: boolean;
+        audio: boolean;
+      };
     };
   };
-};
+}
 
-export interface SignalUserConfig<TParams extends DefaultParams> {
-  params: TParams;
-};
+export interface SignalUserConfig<T extends DefaultParams = DefaultParams>
+  extends UserConfig {
+  params: T;
+}
