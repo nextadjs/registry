@@ -1,10 +1,11 @@
-export type Regulations = {
-  coppa: boolean;
-  gdpr: boolean;
-  usPrivacy: string;
-  gpp: string;
-  gppSectionIds?: number[];
-};
+import type { DefaultParams } from "@/types";
+import type { AdCOMContext } from "@/types/adcom";
+import type { ClientCompliance } from "../client-compliance";
+import type { ServerCompliance } from "../server-compliance";
 
-export * from './spec';
-export * from './config';
+export type Compliance<T1 extends DefaultParams, T2 extends AdCOMContext> =
+  | ClientCompliance<T1, T2>
+  | ServerCompliance<T1, T2>;
+
+export * from "./config";
+export * from "./integration";

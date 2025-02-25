@@ -1,15 +1,12 @@
-import type { CustomParams } from "./types";
-import type { ComplianceSpec } from "@/compliance/types";
+import type { ComplianceClientIntegration } from "@/compliance";
+import type { DefaultParams } from "@/types";
 
-const spec: ComplianceSpec = {
-  openrtb: {
-    v26: {
-      validateBidRequest: async (bidRequest, params: CustomParams) => {
-        bidRequest.bcat = [...(bidRequest.bcat || []), 'IAB25-4', 'IAB25-5']
-        return bidRequest;
-      },
-    },
-  },
+interface Params extends DefaultParams {
+    site: number;
 };
 
-export default spec;
+const integration: ComplianceClientIntegration<Params> = {
+
+};
+
+export default integration;

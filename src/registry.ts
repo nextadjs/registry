@@ -1,6 +1,6 @@
 import { Registry } from "@/core/registry";
 import { Measurement } from "./measurement";
-import { Compliance } from "./compliance";
+import { ComplianceRegistry } from "./compliance";
 import { BuyerRegistry } from "./buyer";
 import { SignalRegistry } from "./signal";
 
@@ -10,4 +10,4 @@ export const signalRegistry = new SignalRegistry();
 
 export const measurementRegistry = new Registry<Measurement>();
 
-export const complianceRegistry = new Registry<Compliance>();
+export const complianceRegistry = new ComplianceRegistry();

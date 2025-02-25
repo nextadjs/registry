@@ -8,55 +8,46 @@ import type {
   V26SeatBid,
 } from "@/types/openrtb";
 
-export interface OpenRTBRequestConfig {
-  url: string;
-  headers?: HeadersInit;
-  cache?: RequestCache;
-  credentials?: RequestCredentials;
-  mode?: RequestMode;
-}
-
-export interface BuyerOpenRTBIntegration<
+export interface ComplianceOpenRTBIntegration<
   T1 extends DefaultParams,
   T2 extends AdCOMContext
 > {
-    v26?: BuyerOpenRTB26Integration<T1, T2>;
+  v26?: ComplianceOpenRTB26Integration<T1, T2>;
 }
 
-export interface BuyerOpenRTB26Integration<
+export interface ComplianceOpenRTB26Integration<
   T1 extends DefaultParams,
   T2 extends AdCOMContext
 > {
-  configureRequest(params: T1, context: T2): OpenRTBRequestConfig;
-  decorateBidRequest?(
+  validateBidRequest?(
     bidRequest: Omit<V26BidRequest, "imp">,
     params: T1,
     context: T2
-  ): Omit<V26BidRequest, "imp">;
-  decorateBidResponse?(
+  ): Promise<Omit<V26BidRequest, "imp">>;
+  validateBidResponse?(
     bidResponse: Omit<V26BidResponse, "seatbid">,
     bidRequest: V26BidRequest,
     params: T1,
     context: T2
-  ): Omit<V26BidResponse, "seatbid">;
-  decorateImpression?(
+  ): Promise<Omit<V26BidResponse, "seatbid">>;
+  validateImpression?(
     impression: V26Imp,
     bidRequest: V26BidRequest,
     params: T1,
     context: T2
-  ): V26Imp;
-  decorateSeatBid?(
+  ): Promise<V26Imp>;
+  validateSeatBid?(
     seatBid: Omit<V26SeatBid, "bid">,
     bidRequest: V26BidRequest,
     bidResponse: V26BidResponse,
     params: T1,
     context: T2
-  ): Omit<V26SeatBid, "bid">;
-  decorateBid?(
+  ): Promise<Omit<V26SeatBid, "bid">>;
+  validateBid?(
     bid: V26Bid,
     bidRequest: V26BidRequest,
     bidResponse: V26BidResponse,
     params: T1,
     context: T2
-  ): V26Bid;
+  ): Promise<V26Bid>;
 }
