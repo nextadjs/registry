@@ -23,31 +23,31 @@ export interface SignalOpenRTB26Integration<
     bidRequest: Omit<V26BidRequest, "imp">,
     params: T1,
     context: T2
-  ): Omit<V26BidRequest, "imp">;
+  ): Promise<Omit<V26BidRequest, "imp">>;
   decorateBidResponse?(
     bidResponse: Omit<V26BidResponse, "seatbid">,
     bidRequest: V26BidRequest,
     params: T1,
     context: T2
-  ): Omit<V26BidResponse, "seatbid">;
+  ): Promise<Omit<V26BidResponse, "seatbid">>;
   decorateImpression?(
     impression: V26Imp,
     bidRequest: V26BidRequest,
     params: T1,
     context: T2
-  ): V26Imp;
+  ): Promise<V26Imp>;
   decorateSeatBid?(
     seatBid: Omit<V26SeatBid, "bid">,
     bidRequest: V26BidRequest,
     bidResponse: V26BidResponse,
     params: T1,
     context: T2
-  ): Omit<V26SeatBid, "bid">;
+  ): Promise<Omit<V26SeatBid, "bid">>;
   decorateBid?(
     bid: V26Bid,
     bidRequest: V26BidRequest,
     bidResponse: V26BidResponse,
     params: T1,
     context: T2
-  ): V26Bid;
+  ): Promise<V26Bid>;
 }
