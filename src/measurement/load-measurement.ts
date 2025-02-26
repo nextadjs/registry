@@ -5,13 +5,12 @@ import type { AdCOMContext } from "@/types/adcom";
 import type { MeasurementUserConfig } from "./types";
 import type { Measurement } from "./measurement";
 
-export const loadSignal = async <
+export const loadMeasurement = async <
   P extends DefaultParams,
-  C extends AdCOMContext
 >(
   name: string,
   runtime: Runtime,
-  context: C,
+  context: AdCOMContext,
   userConfig: MeasurementUserConfig<P>
 ) => {
   const measurements: Measurement<P>[] = [];
