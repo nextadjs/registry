@@ -1,10 +1,12 @@
 import type { Runtime } from "@/types";
+import type { AdCOMContext } from "@/types/adcom";
 
-export interface MeasurementEvent<T = Record<string, unknown>> {
+export interface MeasurementEvent<T1 = null> {
   type: MeasurementEventType;
   timestamp: number;
   runtime: Runtime | 'both';
-  data: T;
+  context: AdCOMContext,
+  data: T1;
 }
 
 export interface MeasurementEventMap {

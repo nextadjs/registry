@@ -6,12 +6,12 @@ import { ClientMeasurement } from "./client-measurement";
 import { ServerMeasurement } from "./server-measurement";
 
 export const createMeasurement = async <
-  TParams extends DefaultParams = DefaultParams
+  T extends DefaultParams = DefaultParams
 >(
   name: string
-): Promise<Measurement> => {
+): Promise<Measurement<T>> => {
   const config = await import(`@measurements/${name}/measurement.json`);
-  const measurement = new Measurement<TParams>(
+  const measurement = new Measurement<T>(
     config,
     eventEmitter,
     scriptLoader
@@ -20,12 +20,12 @@ export const createMeasurement = async <
 };
 
 export const createClientMeasurement = async <
-  TParams extends DefaultParams = DefaultParams
+  T extends DefaultParams = DefaultParams
 >(
   name: string
-): Promise<Measurement> => {
+): Promise<Measurement<T>> => {
   const config = await import(`@measurements/${name}/measurement.json`);
-  const measurement = new ClientMeasurement<TParams>(
+  const measurement = new ClientMeasurement<T>(
     config,
     eventEmitter,
     scriptLoader
@@ -34,12 +34,12 @@ export const createClientMeasurement = async <
 };
 
 export const createServerMeasurement = async <
-  TParams extends DefaultParams = DefaultParams
+  T extends DefaultParams = DefaultParams
 >(
   name: string
-): Promise<Measurement> => {
+): Promise<Measurement<T>> => {
   const config = await import(`@measurements/${name}/measurement.json`);
-  const measurement = new ServerMeasurement<TParams>(
+  const measurement = new ServerMeasurement<T>(
     config,
     eventEmitter,
     scriptLoader
