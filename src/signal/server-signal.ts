@@ -8,16 +8,16 @@ import type { OpenRTBHandler } from "./handlers/openrtb-handler";
 import type { AdCOMContext } from "@/types/adcom";
 import { TradeHandlerFactory } from "./handlers/factory";
 
-export class ServerSignal<T1 extends DefaultParams, T2 extends AdCOMContext> {
-  private tradeHandlerFactory: TradeHandlerFactory<T1, T2>;
+export class ServerSignal<P extends DefaultParams, C extends AdCOMContext> {
+  private tradeHandlerFactory: TradeHandlerFactory<P, C>;
 
   public constructor(
     public readonly config: SignalConfig,
-    public readonly userConfig: SignalUserConfig<T1>,
-    public readonly context: T2,
-    integration: SignalServerIntegration<T1>
+    public readonly userConfig: SignalUserConfig<P>,
+    public readonly context: C,
+    integration: SignalServerIntegration<P>
   ) {
-    this.tradeHandlerFactory = new TradeHandlerFactory<T1, T2>(integration);
+    this.tradeHandlerFactory = new TradeHandlerFactory<P, C>(integration);
   }
 
   public handleTrade(tradeMethod: TradeMethod) {
@@ -27,7 +27,7 @@ export class ServerSignal<T1 extends DefaultParams, T2 extends AdCOMContext> {
     }
   }
 
-  public handleOpenRTB(): OpenRTBHandler<T1, T2> {
+  public handleOpenRTB(): OpenRTBHandler<P, C> {
     return this.tradeHandlerFactory.createOpenRTB(
       this.userConfig,
       this.context

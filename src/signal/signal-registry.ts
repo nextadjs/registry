@@ -12,35 +12,35 @@ export class SignalRegistry {
     this.modules.set(name, loader);
   }
 
-  public async loadForClient<T1 extends DefaultParams, T2 extends AdCOMContext>(
+  public async loadForClient<P extends DefaultParams, C extends AdCOMContext>(
     name: string,
-    userConfig: SignalUserConfig<T1>,
-    context: T2
-  ): Promise<ClientSignal<T1, T2>> {
+    userConfig: SignalUserConfig<P>,
+    context: C
+  ): Promise<ClientSignal<P, C>> {
     return this.load(name, "client", userConfig, context) as Promise<
-      ClientSignal<T1, T2>
+      ClientSignal<P, C>
     >;
   }
 
-  public async loadForServer<T1 extends DefaultParams, T2 extends AdCOMContext>(
+  public async loadForServer<P extends DefaultParams, C extends AdCOMContext>(
     name: string,
-    userConfig: SignalUserConfig<T1>,
-    context: T2
-  ): Promise<ServerSignal<T1, T2>> {
+    userConfig: SignalUserConfig<P>,
+    context: C
+  ): Promise<ServerSignal<P, C>> {
     return this.load(name, "server", userConfig, context) as Promise<
-      ServerSignal<T1, T2>
+      ServerSignal<P, C>
     >;
   }
 
-  public async load<T1 extends DefaultParams, T2 extends AdCOMContext>(
+  public async load<P extends DefaultParams, C extends AdCOMContext>(
     name: string,
     runtime: Runtime,
-    userConfig: SignalUserConfig<T1>,
-    context: T2
-  ): Promise<Signal<T1, T2>> {
+    userConfig: SignalUserConfig<P>,
+    context: C
+  ): Promise<Signal<P, C>> {
     const loader = this.modules.get(name);
     // TODO: Errorの例外化
     if (!loader) throw new Error(`Module ${name} not found`);
-    return loader<T1, T2>(name, runtime, context, userConfig);
+    return loader<P, C>(name, runtime, context, userConfig);
   }
 }

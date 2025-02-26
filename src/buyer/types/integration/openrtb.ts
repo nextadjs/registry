@@ -17,46 +17,46 @@ export interface OpenRTBRequestConfig {
 }
 
 export interface BuyerOpenRTBIntegration<
-  T1 extends DefaultParams,
-  T2 extends AdCOMContext
+  P extends DefaultParams,
+  C extends AdCOMContext
 > {
-    v26?: BuyerOpenRTB26Integration<T1, T2>;
+    v26?: BuyerOpenRTB26Integration<P, C>;
 }
 
 export interface BuyerOpenRTB26Integration<
-  T1 extends DefaultParams,
-  T2 extends AdCOMContext
+  P extends DefaultParams,
+  C extends AdCOMContext
 > {
-  configureRequest(params: T1, context: T2): OpenRTBRequestConfig;
+  configureRequest(params: P, context: C): OpenRTBRequestConfig;
   decorateBidRequest?(
     bidRequest: Omit<V26BidRequest, "imp">,
-    params: T1,
-    context: T2
+    params: P,
+    context: C
   ): Omit<V26BidRequest, "imp">;
   decorateBidResponse?(
     bidResponse: Omit<V26BidResponse, "seatbid">,
     bidRequest: V26BidRequest,
-    params: T1,
-    context: T2
+    params: P,
+    context: C
   ): Omit<V26BidResponse, "seatbid">;
   decorateImpression?(
     impression: V26Imp,
     bidRequest: V26BidRequest,
-    params: T1,
-    context: T2
+    params: P,
+    context: C
   ): V26Imp;
   decorateSeatBid?(
     seatBid: Omit<V26SeatBid, "bid">,
     bidRequest: V26BidRequest,
     bidResponse: V26BidResponse,
-    params: T1,
-    context: T2
+    params: P,
+    context: C
   ): Omit<V26SeatBid, "bid">;
   decorateBid?(
     bid: V26Bid,
     bidRequest: V26BidRequest,
     bidResponse: V26BidResponse,
-    params: T1,
-    context: T2
+    params: P,
+    context: C
   ): V26Bid;
 }

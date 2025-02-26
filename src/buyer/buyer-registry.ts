@@ -12,35 +12,35 @@ export class BuyerRegistry {
     this.modules.set(name, loader);
   }
 
-  public async loadForClient<T1 extends DefaultParams, T2 extends AdCOMContext>(
+  public async loadForClient<P extends DefaultParams, C extends AdCOMContext>(
     name: string,
-    userConfig: BuyerUserConfig<T1>,
-    context: T2
-  ): Promise<ClientBuyer<T1, T2>> {
+    userConfig: BuyerUserConfig<P>,
+    context: C
+  ): Promise<ClientBuyer<P, C>> {
     return this.load(name, "client", userConfig, context) as Promise<
-      ClientBuyer<T1, T2>
+      ClientBuyer<P, C>
     >;
   }
 
-  public async loadForServer<T1 extends DefaultParams, T2 extends AdCOMContext>(
+  public async loadForServer<P extends DefaultParams, C extends AdCOMContext>(
     name: string,
-    userConfig: BuyerUserConfig<T1>,
-    context: T2
-  ): Promise<ServerBuyer<T1, T2>> {
+    userConfig: BuyerUserConfig<P>,
+    context: C
+  ): Promise<ServerBuyer<P, C>> {
     return this.load(name, "server", userConfig, context) as Promise<
-      ServerBuyer<T1, T2>
+      ServerBuyer<P, C>
     >;
   }
 
-  public async load<T1 extends DefaultParams, T2 extends AdCOMContext>(
+  public async load<P extends DefaultParams, C extends AdCOMContext>(
     name: string,
     runtime: Runtime,
-    userConfig: BuyerUserConfig<T1>,
-    context: T2
-  ): Promise<Buyer<T1, T2>> {
+    userConfig: BuyerUserConfig<P>,
+    context: C
+  ): Promise<Buyer<P, C>> {
     const loader = this.modules.get(name);
     // TODO: Errorの例外化
     if (!loader) throw new Error(`Module ${name} not found`);
-    return loader<T1, T2>(name, runtime, context, userConfig);
+    return loader<P, C>(name, runtime, context, userConfig);
   }
 }
