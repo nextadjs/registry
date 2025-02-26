@@ -6,11 +6,13 @@ import type {
   UserConfig,
 } from "@/types";
 import type { OpenRTBVersion } from "@/types/openrtb";
+import type { SignalType } from ".";
 
 // TODO: JSON Schemaで型補完
 // TODO: version関係の整え
 export interface SignalConfig {
   name: string;
+  type: SignalType;
   capabilities: SignalCapabilities;
 }
 

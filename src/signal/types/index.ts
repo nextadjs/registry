@@ -7,5 +7,7 @@ export type Signal<P extends DefaultParams, C extends AdCOMContext> =
   | ClientSignal<P, C>
   | ServerSignal<P, C>;
 
+export type SignalType = "identity" | "contextual" | "audience" | "delivery";
+
 export * from "./config";
 export * from "./integration";
