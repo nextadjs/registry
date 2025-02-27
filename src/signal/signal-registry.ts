@@ -16,9 +16,9 @@ export class SignalRegistry {
     name: string,
     userConfig: SignalUserConfig<P>,
     context: Context
-  ): Promise<ClientSignal<P>> {
+  ): Promise<ClientSignal<unknown, P>> {
     return this.load(name, "client", userConfig, context) as Promise<
-      ClientSignal<P>
+      ClientSignal<unknown, P>
     >;
   }
 
@@ -26,9 +26,9 @@ export class SignalRegistry {
     name: string,
     userConfig: SignalUserConfig<P>,
     context: Context
-  ): Promise<ServerSignal<P>> {
+  ): Promise<ServerSignal<unknown, P>> {
     return this.load(name, "server", userConfig, context) as Promise<
-      ServerSignal<P>
+      ServerSignal<unknown, P>
     >;
   }
 
@@ -37,7 +37,7 @@ export class SignalRegistry {
     runtime: Runtime,
     userConfig: SignalUserConfig<P>,
     context: Context
-  ): Promise<Signal<P>> {
+  ): Promise<Signal<unknown, P>> {
     const loader = this.modules.get(name);
     // TODO: Errorの例外化
     if (!loader) throw new Error(`Module ${name} not found`);

@@ -8,40 +8,45 @@ import type {
   V26SeatBid,
 } from "@/types/openrtb";
 
-
 export interface SignalOpenRTB26Integration<
+  D,
   P extends DefaultParams,
   C extends Context
 > {
   decorateBidRequest?(
     bidRequest: Omit<V26BidRequest, "imp">,
+    data: D,
     params: P,
     context: C
-  ): Promise<Omit<V26BidRequest, "imp">>;
+  ): Omit<V26BidRequest, "imp">;
   decorateBidResponse?(
     bidResponse: Omit<V26BidResponse, "seatbid">,
     bidRequest: V26BidRequest,
+    data: D,
     params: P,
     context: C
-  ): Promise<Omit<V26BidResponse, "seatbid">>;
+  ): Omit<V26BidResponse, "seatbid">;
   decorateImpression?(
     impression: V26Imp,
     bidRequest: V26BidRequest,
+    data: D,
     params: P,
     context: C
-  ): Promise<V26Imp>;
+  ): V26Imp;
   decorateSeatBid?(
     seatBid: Omit<V26SeatBid, "bid">,
     bidRequest: V26BidRequest,
     bidResponse: V26BidResponse,
+    data: D,
     params: P,
     context: C
-  ): Promise<Omit<V26SeatBid, "bid">>;
+  ): Omit<V26SeatBid, "bid">;
   decorateBid?(
     bid: V26Bid,
     bidRequest: V26BidRequest,
     bidResponse: V26BidResponse,
+    data: D,
     params: P,
     context: C
-  ): Promise<V26Bid>;
+  ): V26Bid;
 }

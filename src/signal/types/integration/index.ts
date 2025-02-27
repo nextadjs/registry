@@ -7,20 +7,24 @@ import type {
   SignalServerContextIntegration,
 } from "./context";
 import type { SignalOpenRTB26Integration } from "./openrtb";
+import type { ClientAsyncCollect, CollectResult, ServerAsyncCollect } from "./collect";
 
-export type SignalIntegration<T extends DefaultParams> =
-  | SignalClientIntegration<T>
-  | SignalServerIntegration<T>;
+export type SignalIntegration<D, T extends DefaultParams> =
+  | SignalClientIntegration<D, T>
+  | SignalServerIntegration<D, T>;
 
-export interface SignalClientIntegration<T extends DefaultParams> {
-  openrtbV26?: SignalOpenRTB26Integration<T, Context>;
-  context?: SignalClientContextIntegration<T>;
+export interface SignalClientIntegration<D, T extends DefaultParams> {
+  collect(): Promise<CollectResult<D, ClientAsyncCollect>>;
+  openrtbV26?: SignalOpenRTB26Integration<D, T, Context>;
+  context?: SignalClientContextIntegration<D, T>;
 }
 
-export interface SignalServerIntegration<T extends DefaultParams> {
-  openrtbV26?: SignalOpenRTB26Integration<T, Context>;
-  context?: SignalServerContextIntegration<T>;
+export interface SignalServerIntegration<D, T extends DefaultParams> {
+  collect(): Promise<CollectResult<D, ServerAsyncCollect>>;
+  openrtbV26?: SignalOpenRTB26Integration<D, T, Context>;
+  context?: SignalServerContextIntegration<D, T>;
 }
 
 export * from "./openrtb";
 export * from './context';
+export * from './collect';

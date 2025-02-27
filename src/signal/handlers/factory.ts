@@ -13,16 +13,20 @@ import type {
 import { OpenRTB26Handler } from "./openrtb-26-handler";
 import { ContextHandler } from "./context-handler";
 
-export class TradeHandlerFactory<P extends DefaultParams> {
-  public constructor(private integration: SignalIntegration<P>) {}
+export class TradeHandlerFactory<D, P extends DefaultParams> {
+  public constructor(private integration: SignalIntegration<D, P>) {}
 
-  public createOpenRTBv26(userConfig: SignalUserConfig<P>, context: Context) {
+  public createOpenRTBv26(
+    data: D,
+    userConfig: SignalUserConfig<P>,
+    context: Context
+  ) {
     if (!this.integration?.openrtbV26) {
       // TODO: 適切な例外
       throw new Error("OpenRTB integration not found");
     }
 
-    let integration: SignalOpenRTB26Integration<P, Context> =
+    let integration: SignalOpenRTB26Integration<D, P, Context> =
       this.integration.openrtbV26;
 
     if (
@@ -32,7 +36,7 @@ export class TradeHandlerFactory<P extends DefaultParams> {
       integration = Object.assign(
         this.integration.context?.site?.openrtbV26,
         integration
-      ) as SignalOpenRTB26Integration<P, ContextWithSite>;
+      ) as SignalOpenRTB26Integration<D, P, ContextWithSite>;
     } else if (
       context.channel === "app" &&
       this.integration.context?.app?.openrtbV26
@@ -40,7 +44,7 @@ export class TradeHandlerFactory<P extends DefaultParams> {
       integration = Object.assign(
         this.integration.context.app.openrtbV26,
         integration
-      ) as SignalOpenRTB26Integration<P, ContextWithApp>;
+      ) as SignalOpenRTB26Integration<D, P, ContextWithApp>;
     } else if (
       context.channel === "dooh" &&
       this.integration.context?.dooh?.openrtbV26
@@ -48,17 +52,27 @@ export class TradeHandlerFactory<P extends DefaultParams> {
       integration = Object.assign(
         this.integration.context.dooh.openrtbV26,
         integration
-      ) as SignalOpenRTB26Integration<P, ContextWithDooh>;
+      ) as SignalOpenRTB26Integration<D, P, ContextWithDooh>;
     }
 
-    return new OpenRTB26Handler<P>(
+    return new OpenRTB26Handler<D, P>(
+      data,
       userConfig,
       context,
       this.integration.openrtbV26
     );
   }
 
-  public createContext(userConfig: SignalUserConfig<P>, context: Context) {
-    return new ContextHandler<P>(userConfig, context, this.integration.context);
+  public createContext(
+    data: D,
+    userConfig: SignalUserConfig<P>,
+    context: Context
+  ) {
+    return new ContextHandler<D, P>(
+      data,
+      userConfig,
+      context,
+      this.integration.context
+    );
   }
 }

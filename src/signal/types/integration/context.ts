@@ -16,61 +16,67 @@ import type {
 } from "@/types";
 import type { SignalOpenRTB26Integration } from "./openrtb";
 
-export interface SignalClientContextIntegration<T extends DefaultParams>
-  extends SignalAdCOMContextIntegration<T> {
+export interface SignalClientContextIntegration<D, T extends DefaultParams>
+  extends SignalAdCOMContextIntegration<D, T> {
   site?: {
-    openrtbV26?: SignalOpenRTB26Integration<T, ContextWithSite>;
+    openrtbV26?: SignalOpenRTB26Integration<D, T, ContextWithSite>;
   };
   app?: {
-    openrtbV26?: SignalOpenRTB26Integration<T, ContextWithApp>;
+    openrtbV26?: SignalOpenRTB26Integration<D, T, ContextWithApp>;
   };
   dooh?: {
-    openrtbV26?: SignalOpenRTB26Integration<T, ContextWithDooh>;
+    openrtbV26?: SignalOpenRTB26Integration<D, T, ContextWithDooh>;
   };
 }
 
-export interface SignalServerContextIntegration<T extends DefaultParams>
-  extends SignalAdCOMContextIntegration<T> {
+export interface SignalServerContextIntegration<D, T extends DefaultParams>
+  extends SignalAdCOMContextIntegration<D, T> {
   site?: {
-    openrtbV26?: SignalOpenRTB26Integration<T, ContextWithSite>;
+    openrtbV26?: SignalOpenRTB26Integration<D, T, ContextWithSite>;
   };
   app?: {
-    openrtbV26?: SignalOpenRTB26Integration<T, ContextWithApp>;
+    openrtbV26?: SignalOpenRTB26Integration<D, T, ContextWithApp>;
   };
   dooh?: {
-    openrtbV26?: SignalOpenRTB26Integration<T, ContextWithDooh>;
+    openrtbV26?: SignalOpenRTB26Integration<D, T, ContextWithDooh>;
   };
 }
 
-export interface SignalAdCOMContextIntegration<T extends DefaultParams> {
+export interface SignalAdCOMContextIntegration<D, T extends DefaultParams> {
   decorateSite(
     site: AdCOMSite,
+    data: D,
     params: T,
     context: Context
   ): Promise<AdCOMSite>;
-  decorateApp(app: AdCOMApp, params: T, context: Context): Promise<AdCOMApp>;
+  decorateApp(app: AdCOMApp, data: D, params: T, context: Context): Promise<AdCOMApp>;
   decorateDooh(
     dooh: AdCOMDooh,
+    data: D,
     params: T,
     context: Context
   ): Promise<AdCOMDooh>;
   decorateUser(
     user: AdCOMUser,
+    data: D,
     params: T,
     context: Context
   ): Promise<AdCOMUser>;
   decorateDevice(
     device: AdCOMDevice,
+    data: D,
     params: T,
     context: AdCOMDevice
   ): Promise<AdCOMDevice>;
   decorateRegs(
     regs: AdCOMRegs,
+    data: D,
     params: T,
     context: Context
   ): Promise<AdCOMRegs>;
   decorateRestrictions(
     restrictions: AdCOMRestrictions,
+    data: D,
     params: T,
     context: AdCOMRestrictions
   ): Promise<AdCOMRestrictions>;

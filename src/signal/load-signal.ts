@@ -19,12 +19,12 @@ export const loadSignal = async <
   // TODO: 適切なエラーハンドリング
   if (runtime === "server") {
     const integration = (await import(`@signals/${name}/server`))
-      .default as SignalServerIntegration<P>;
+      .default as SignalServerIntegration<unknown, P>;
     const config = await import(`@signals/${name}/signal.json`);
     return new ServerSignal(config, userConfig, context, integration);
   } else if (runtime === "client") {
     const integration = (await import(`@signals/${name}/client`))
-      .default as SignalClientIntegration<P>;
+      .default as SignalClientIntegration<unknown, P>;
     const config = await import(`@signals/${name}/signal.json`);
     return new ClientSignal(config, userConfig, context, integration);
   }
