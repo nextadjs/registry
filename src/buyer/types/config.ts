@@ -1,5 +1,5 @@
 import type {
-  Context,
+  Channel,
   DefaultParams,
   Runtime,
   TradeMethod,
@@ -16,7 +16,9 @@ export interface BuyerConfig {
 
 export interface BuyerCapabilities {
   runtime: Runtime[];
-  context: Context[];
+  context: {
+    channel: Channel[];
+  },
   trade: {
     supported_method: TradeMethod[];
     openrtb?: {
