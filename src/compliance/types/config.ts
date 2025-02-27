@@ -6,11 +6,13 @@ import type {
   UserConfig,
 } from "@/types";
 import type { OpenRTBVersion } from "@/types/openrtb";
+import type { ComplianceType } from ".";
 
 // TODO: JSON Schemaで型補完
 // TODO: version関係の整え
 export interface ComplianceConfig {
   name: string;
+  type: ComplianceType;
   capabilities: ComplianceCapabilities;
 }
 

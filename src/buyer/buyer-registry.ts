@@ -12,35 +12,35 @@ export class BuyerRegistry {
     this.modules.set(name, loader);
   }
 
-  public async loadForClient<P extends DefaultParams, C extends AdCOMContext>(
+  public async loadForClient<P extends DefaultParams>(
     name: string,
     userConfig: BuyerUserConfig<P>,
-    context: C
-  ): Promise<ClientBuyer<P, C>> {
+    context: AdCOMContext
+  ): Promise<ClientBuyer<P>> {
     return this.load(name, "client", userConfig, context) as Promise<
-      ClientBuyer<P, C>
+      ClientBuyer<P>
     >;
   }
 
-  public async loadForServer<P extends DefaultParams, C extends AdCOMContext>(
+  public async loadForServer<P extends DefaultParams>(
     name: string,
     userConfig: BuyerUserConfig<P>,
-    context: C
-  ): Promise<ServerBuyer<P, C>> {
+    context: AdCOMContext
+  ): Promise<ServerBuyer<P>> {
     return this.load(name, "server", userConfig, context) as Promise<
-      ServerBuyer<P, C>
+      ServerBuyer<P>
     >;
   }
 
-  public async load<P extends DefaultParams, C extends AdCOMContext>(
+  public async load<P extends DefaultParams>(
     name: string,
     runtime: Runtime,
     userConfig: BuyerUserConfig<P>,
-    context: C
-  ): Promise<Buyer<P, C>> {
+    context: AdCOMContext
+  ): Promise<Buyer<P>> {
     const loader = this.modules.get(name);
     // TODO: Errorの例外化
     if (!loader) throw new Error(`Module ${name} not found`);
-    return loader<P, C>(name, runtime, context, userConfig);
+    return loader<P>(name, runtime, context, userConfig);
   }
 }

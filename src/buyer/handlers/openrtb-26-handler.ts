@@ -7,13 +7,12 @@ import type {
 import type { AdCOMContext } from "@/types/adcom";
 
 export class OpenRTB26Handler<
-  P extends DefaultParams,
-  C extends AdCOMContext
+  P extends DefaultParams
 > {
   public constructor(
     private userConfig: BuyerUserConfig<P>,
-    private context: C,
-    private integration: BuyerOpenRTB26Integration<P, C>
+    private context: AdCOMContext,
+    private integration: BuyerOpenRTB26Integration<P, AdCOMContext>
   ) {}
 
   public configureRequest(): OpenRTBRequestConfig {

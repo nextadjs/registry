@@ -9,12 +9,11 @@ import type { AdCOMContext } from "@/types/adcom";
 import { ClientSignal } from "./client-signal";
 
 export const loadSignal = async <
-  P extends DefaultParams,
-  C extends AdCOMContext
+  P extends DefaultParams
 >(
   name: string,
   runtime: Runtime,
-  context: C,
+  context: AdCOMContext,
   userConfig: SignalUserConfig<P>
 ) => {
   // TODO: 適切なエラーハンドリング

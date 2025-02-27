@@ -1,43 +1,26 @@
 import type { DefaultParams } from "@/types";
 import type {
   AdCOMContext,
-  AdCOMContextWithApp,
-  AdCOMContextWithDooh,
-  AdCOMContextWithSite,
 } from "@/types/adcom";
 import type { ComplianceOpenRTBIntegration } from "./openrtb";
+import type {
+  ComplianceClientContextIntegration,
+  ComplianceServerContextIntegration,
+} from "./context";
 
 export type ComplianceIntegration<T extends DefaultParams> =
-  ComplianceClientIntegration<T> | ComplianceServerIntegration<T>;
+  | ComplianceClientIntegration<T>
+  | ComplianceServerIntegration<T>;
 
 export interface ComplianceClientIntegration<T extends DefaultParams> {
   openrtb?: ComplianceOpenRTBIntegration<T, AdCOMContext>;
-  context?: {
-    site?: {
-      openrtb: ComplianceOpenRTBIntegration<T, AdCOMContextWithSite>;
-    };
-    app?: {
-      openrtb: ComplianceOpenRTBIntegration<T, AdCOMContextWithApp>;
-    };
-    dooh?: {
-      openrtb: ComplianceOpenRTBIntegration<T, AdCOMContextWithDooh>;
-    };
-  };
+  context?: ComplianceClientContextIntegration<T>;
 }
 
 export interface ComplianceServerIntegration<T extends DefaultParams> {
   openrtb?: ComplianceOpenRTBIntegration<T, AdCOMContext>;
-  context?: {
-    site?: {
-      openrtb?: ComplianceOpenRTBIntegration<T, AdCOMContextWithSite>;
-    };
-    app?: {
-      openrtb?: ComplianceOpenRTBIntegration<T, AdCOMContextWithApp>;
-    };
-    dooh?: {
-      openrtb?: ComplianceOpenRTBIntegration<T, AdCOMContextWithDooh>;
-    };
-  };
+  context?: ComplianceServerContextIntegration<T>;
 }
 
 export * from "./openrtb";
+export * from './context';

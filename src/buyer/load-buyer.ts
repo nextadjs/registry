@@ -5,12 +5,11 @@ import type { AdCOMContext } from "@/types/adcom";
 import { ClientBuyer } from "./client-buyer";
 
 export const loadBuyer = async <
-  P extends DefaultParams,
-  C extends AdCOMContext
+  P extends DefaultParams
 >(
   name: string,
   runtime: Runtime,
-  context: C,
+  context: AdCOMContext,
   userConfig: BuyerUserConfig<P>
 ) => {
   // TODO: 適切なエラーハンドリング

@@ -1,10 +1,8 @@
 import type { DefaultParams } from "@/types";
-import type { ClientBuyer, ServerBuyer } from "../";
-import type { AdCOMContext } from "@/types/adcom";
+import type { ClientBuyer } from "../client-buyer";
+import type { ServerBuyer } from "../server-buyer";
 
-export type Buyer<P extends DefaultParams, C extends AdCOMContext> =
-  | ClientBuyer<P, C>
-  | ServerBuyer<P, C>;
+export type Buyer<P extends DefaultParams> = ClientBuyer<P> | ServerBuyer<P>;
 
 export * from "./integration";
 export * from "./config";

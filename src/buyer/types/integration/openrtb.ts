@@ -20,7 +20,7 @@ export interface BuyerOpenRTBIntegration<
   P extends DefaultParams,
   C extends AdCOMContext
 > {
-    v26?: BuyerOpenRTB26Integration<P, C>;
+  v26?: BuyerOpenRTB26Integration<P, C>;
 }
 
 export interface BuyerOpenRTB26Integration<

@@ -12,35 +12,35 @@ export class ComplianceRegistry {
     this.modules.set(name, loader);
   }
 
-  public async loadForClient<T1 extends DefaultParams, T2 extends AdCOMContext>(
+  public async loadForClient<P extends DefaultParams>(
     name: string,
-    userConfig: ComplianceUserConfig<T1>,
-    context: T2
-  ): Promise<ClientCompliance<T1, T2>> {
+    userConfig: ComplianceUserConfig<P>,
+    context: AdCOMContext
+  ): Promise<ClientCompliance<P>> {
     return this.load(name, "client", userConfig, context) as Promise<
-      ClientCompliance<T1, T2>
+      ClientCompliance<P>
     >;
   }
 
-  public async loadForServer<T1 extends DefaultParams, T2 extends AdCOMContext>(
+  public async loadForServer<P extends DefaultParams>(
     name: string,
-    userConfig: ComplianceUserConfig<T1>,
-    context: T2
-  ): Promise<ServerCompliance<T1, T2>> {
+    userConfig: ComplianceUserConfig<P>,
+    context: AdCOMContext
+  ): Promise<ServerCompliance<P>> {
     return this.load(name, "server", userConfig, context) as Promise<
-      ServerCompliance<T1, T2>
+      ServerCompliance<P>
     >;
   }
 
-  public async load<T1 extends DefaultParams, T2 extends AdCOMContext>(
+  public async load<P extends DefaultParams>(
     name: string,
     runtime: Runtime,
-    userConfig: ComplianceUserConfig<T1>,
-    context: T2
-  ): Promise<Compliance<T1, T2>> {
+    userConfig: ComplianceUserConfig<P>,
+    context: AdCOMContext
+  ): Promise<Compliance<P>> {
     const loader = this.modules.get(name);
     // TODO: Errorの例外化
     if (!loader) throw new Error(`Module ${name} not found`);
-    return loader<T1, T2>(name, runtime, context, userConfig);
+    return loader<P>(name, runtime, context, userConfig);
   }
 }

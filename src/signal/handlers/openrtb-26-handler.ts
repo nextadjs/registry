@@ -7,13 +7,12 @@ import type { AdCOMContext } from "@/types/adcom";
 import type { V26BidRequest } from "@/types/openrtb";
 
 export class OpenRTB26Handler<
-  P extends DefaultParams,
-  C extends AdCOMContext
+  P extends DefaultParams
 > {
   public constructor(
     private userConfig: SignalUserConfig<P>,
-    private context: C,
-    private integration?: SignalOpenRTB26Integration<P, C>
+    private context: AdCOMContext,
+    private integration?: SignalOpenRTB26Integration<P, AdCOMContext>
   ) {}
 
   public decorateBidRequest(bidRequest: Omit<V26BidRequest, 'imp'>) {
