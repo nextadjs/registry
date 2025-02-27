@@ -5,38 +5,38 @@ import type {
   ContextWithSite,
   DefaultParams,
 } from "@/types";
-import type { BuyerOpenRTBIntegration } from "./openrtb";
+import type { BuyerOpenRTB26Integration } from "./openrtb";
 
 export type BuyerIntegration<T extends DefaultParams> =
   | BuyerClientIntegration<T>
   | BuyerServerIntegration<T>;
 
 export interface BuyerClientIntegration<T extends DefaultParams> {
-  openrtb?: BuyerOpenRTBIntegration<T, Context>;
+  openrtbV26?: BuyerOpenRTB26Integration<T, Context>;
   context?: {
     site?: {
-      openrtb: BuyerOpenRTBIntegration<T, ContextWithSite>;
+      openrtbV26?: BuyerOpenRTB26Integration<T, ContextWithSite>;
     };
     app?: {
-      openrtb: BuyerOpenRTBIntegration<T, ContextWithApp>;
+      openrtbV26?: BuyerOpenRTB26Integration<T, ContextWithApp>;
     };
     dooh?: {
-      openrtb: BuyerOpenRTBIntegration<T, ContextWithDooh>;
+      openrtbV26?: BuyerOpenRTB26Integration<T, ContextWithDooh>;
     };
   };
 }
 
 export interface BuyerServerIntegration<T extends DefaultParams> {
-  openrtb?: BuyerOpenRTBIntegration<T, Context>;
+  openrtbV26?: BuyerOpenRTB26Integration<T, Context>;
   context?: {
     site?: {
-      openrtb?: BuyerOpenRTBIntegration<T, ContextWithSite>;
+      openrtbV26?: BuyerOpenRTB26Integration<T, ContextWithSite>;
     };
     app?: {
-      openrtb?: BuyerOpenRTBIntegration<T, ContextWithApp>;
+      openrtbV26?: BuyerOpenRTB26Integration<T, ContextWithApp>;
     };
     dooh?: {
-      openrtb?: BuyerOpenRTBIntegration<T, ContextWithDooh>;
+      openrtbV26?: BuyerOpenRTB26Integration<T, ContextWithDooh>;
     };
   };
 }

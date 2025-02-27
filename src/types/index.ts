@@ -1,5 +1,4 @@
 import type {
-  AdCOMContextWithApp,
   AdCOMContextWithDooh,
   AdCOMContextWithSite,
 } from "./adcom";
@@ -25,7 +24,7 @@ export type ContextWithDooh = {
 
 export type Channel = "site" | "app" | "dooh";
 
-// 取引方法はラインタイム関係なく並列で管理するため、PrebidはPrebid Serverと明確に分離するためにPrebid.jsにする
-export type TradeMethod = "OpenRTB" | "Prebid.js";
+// 取引方法はラインタイム関係なく完全並列で管理するため、PrebidはPrebid Serverと明確に分離するためにPrebid.jsにする
+export type TradeMethod = "OpenRTB v2.6" | "Prebid.js";
 
 export interface UserConfig {}

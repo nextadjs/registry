@@ -7,14 +7,6 @@ import type {
   V26Imp,
   V26SeatBid,
 } from "@/types/openrtb";
-
-export interface ComplianceOpenRTBIntegration<
-  P extends DefaultParams,
-  C extends Context
-> {
-  v26?: ComplianceOpenRTB26Integration<P, C>;
-}
-
 export interface ComplianceOpenRTB26Integration<
   P extends DefaultParams,
   C extends Context

@@ -4,7 +4,6 @@ import type {
   BuyerConfig,
   BuyerUserConfig,
 } from "./types";
-import type { OpenRTBHandler } from "./handlers/openrtb-handler";
 import { TradeHandlerFactory } from "./handlers/factory";
 
 export class ClientBuyer<P extends DefaultParams> {
@@ -21,13 +20,13 @@ export class ClientBuyer<P extends DefaultParams> {
 
   public handleTrade(tradeMethod: TradeMethod) {
     switch (tradeMethod) {
-      case "OpenRTB":
-        return this.handleOpenRTB();
+      case "OpenRTB v2.6":
+        return this.handleOpenRTBv26();
     }
   }
 
-  public handleOpenRTB(): OpenRTBHandler<P> {
-    return this.tradeHandlerFactory.createOpenRTB(
+  public handleOpenRTBv26() {
+    return this.tradeHandlerFactory.createOpenRTBv26(
       this.userConfig,
       this.context
     );

@@ -4,7 +4,6 @@ import type {
   SignalConfig,
   SignalUserConfig,
 } from "./types";
-import type { OpenRTBHandler } from "./handlers/openrtb-handler";
 import type { Context } from "@/types";
 import { TradeHandlerFactory } from "./handlers/factory";
 
@@ -22,13 +21,13 @@ export class ServerSignal<P extends DefaultParams> {
 
   public handleTrade(tradeMethod: TradeMethod) {
     switch (tradeMethod) {
-      case "OpenRTB":
-        return this.handleOpenRTB();
+      case "OpenRTB v2.6":
+        return this.handleOpenRTBv26();
     }
   }
 
-  public handleOpenRTB(): OpenRTBHandler<P> {
-    return this.tradeHandlerFactory.createOpenRTB(
+  public handleOpenRTBv26() {
+    return this.tradeHandlerFactory.createOpenRTBv26(
       this.userConfig,
       this.context
     );

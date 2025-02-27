@@ -16,13 +16,6 @@ export interface OpenRTBRequestConfig {
   mode?: RequestMode;
 }
 
-export interface BuyerOpenRTBIntegration<
-  P extends DefaultParams,
-  C extends Context
-> {
-  v26?: BuyerOpenRTB26Integration<P, C>;
-}
-
 export interface BuyerOpenRTB26Integration<
   P extends DefaultParams,
   C extends Context

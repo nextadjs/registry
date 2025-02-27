@@ -8,12 +8,6 @@ import type {
   V26SeatBid,
 } from "@/types/openrtb";
 
-export interface SignalOpenRTBIntegration<
-  P extends DefaultParams,
-  C extends Context
-> {
-  v26?: SignalOpenRTB26Integration<P, C>;
-}
 
 export interface SignalOpenRTB26Integration<
   P extends DefaultParams,

@@ -7,29 +7,31 @@ import type {
   AdCOMSite,
   AdCOMUser,
 } from "@/types/adcom";
-import type { ComplianceOpenRTBIntegration } from "./openrtb";
-import type { Context, ContextWithApp, ContextWithDooh, ContextWithSite, DefaultParams } from "@/types";
+import type {
+  Context,
+  ContextWithApp,
+  ContextWithDooh,
+  ContextWithSite,
+  DefaultParams,
+} from "@/types";
+import type { ComplianceOpenRTB26Integration } from "./openrtb";
 
 export interface ComplianceClientContextIntegration<T extends DefaultParams> {
   site?: {
-    openrtb: ComplianceOpenRTBIntegration<T, ContextWithSite>;
+    openrtbV26?: ComplianceOpenRTB26Integration<T, ContextWithSite>;
   };
   app?: {
-    openrtb: ComplianceOpenRTBIntegration<T, ContextWithApp>;
+    openrtbV26?: ComplianceOpenRTB26Integration<T, ContextWithApp>;
   };
   dooh?: {
-    openrtb: ComplianceOpenRTBIntegration<T, ContextWithDooh>;
+    openrtbV26?: ComplianceOpenRTB26Integration<T, ContextWithDooh>;
   };
   validateSite(
     site: AdCOMSite,
     params: T,
     context: Context
   ): Promise<AdCOMSite>;
-  validateApp(
-    app: AdCOMApp,
-    params: T,
-    context: Context
-  ): Promise<AdCOMApp>;
+  validateApp(app: AdCOMApp, params: T, context: Context): Promise<AdCOMApp>;
   validateDooh(
     dooh: AdCOMDooh,
     params: T,
@@ -59,24 +61,20 @@ export interface ComplianceClientContextIntegration<T extends DefaultParams> {
 
 export interface ComplianceServerContextIntegration<T extends DefaultParams> {
   site?: {
-    openrtb: ComplianceOpenRTBIntegration<T, ContextWithSite>;
+    openrtbV26?: ComplianceOpenRTB26Integration<T, ContextWithSite>;
   };
   app?: {
-    openrtb: ComplianceOpenRTBIntegration<T, ContextWithApp>;
+    openrtbV26?: ComplianceOpenRTB26Integration<T, ContextWithApp>;
   };
   dooh?: {
-    openrtb: ComplianceOpenRTBIntegration<T, ContextWithDooh>;
+    openrtbV26?: ComplianceOpenRTB26Integration<T, ContextWithDooh>;
   };
   validateSite(
     site: AdCOMSite,
     params: T,
     context: Context
   ): Promise<AdCOMSite>;
-  validateApp(
-    app: AdCOMApp,
-    params: T,
-    context: Context
-  ): Promise<AdCOMApp>;
+  validateApp(app: AdCOMApp, params: T, context: Context): Promise<AdCOMApp>;
   validateDooh(
     dooh: AdCOMDooh,
     params: T,
