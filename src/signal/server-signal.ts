@@ -7,7 +7,6 @@ import { Signal } from "./signal";
 
 export class ServerSignal<D, P extends DefaultParams> extends Signal<
   D,
-  ServerAsyncCollect,
   SignalServerIntegration<D, P>,
   P
 > {

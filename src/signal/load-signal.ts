@@ -9,13 +9,13 @@ import type { Context } from "@/types";
 import { ClientSignal } from "./client-signal";
 
 export const loadSignal = async <
-  P extends DefaultParams
+  P extends DefaultParams,
 >(
   name: string,
   runtime: Runtime,
   context: Context,
   userConfig: SignalUserConfig<P>
-) => {
+): Promise< ClientSignal<unknown, P> | ServerSignal<unknown, P>> => {
   // TODO: 適切なエラーハンドリング
   if (runtime === "server") {
     const integration = (await import(`@signals/${name}/server`))
@@ -29,5 +29,5 @@ export const loadSignal = async <
     return new ClientSignal(config, userConfig, context, integration);
   }
 
-  throw new Error();
+  throw new Error('Invalid runtime specified');
 };

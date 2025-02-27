@@ -1,9 +1,10 @@
 import type { DefaultParams, Runtime } from "@/types";
 import { loadSignal } from "./load-signal";
-import type { Signal, SignalUserConfig } from "./types";
+import type { SignalIntegration, SignalUserConfig } from "./types";
 import type { Context } from "@/types";
 import type { ClientSignal } from "./client-signal";
 import type { ServerSignal } from "./server-signal";
+import type { Signal } from "./signal";
 
 export class SignalRegistry {
   private modules = new Map<string, typeof loadSignal>();
@@ -37,7 +38,7 @@ export class SignalRegistry {
     runtime: Runtime,
     userConfig: SignalUserConfig<P>,
     context: Context
-  ): Promise<Signal<unknown, P>> {
+  ): Promise<Signal<unknown, SignalIntegration<unknown, P>, P>> {
     const loader = this.modules.get(name);
     // TODO: Errorの例外化
     if (!loader) throw new Error(`Module ${name} not found`);

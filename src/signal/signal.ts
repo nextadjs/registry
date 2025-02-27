@@ -8,12 +8,11 @@ import type {
 import { TradeHandlerFactory } from "./handlers/factory";
 export abstract class Signal<
   D,
-  A extends AsyncCollect,
   I extends SignalIntegration<D, P>,
   P extends DefaultParams
 > {
   protected data!: D;
-  protected asyncCollections: A[] = [];
+  protected asyncCollections: AsyncCollect[] = [];
   protected tradeHandlerFactory: TradeHandlerFactory<D, P>;
 
   public constructor(
@@ -25,7 +24,7 @@ export abstract class Signal<
     this.tradeHandlerFactory = new TradeHandlerFactory<D, P>(integration);
   }
 
-  public getAsyncCollections(): A[] {
+  public getAsyncCollections(): AsyncCollect[] {
     return this.asyncCollections;
   }
 
@@ -36,6 +35,6 @@ export abstract class Signal<
     this.asyncCollections = result.asyncCollections.map((asyncCollection) => ({
       status: false,
       ...asyncCollection,
-    })) as A[];
+    })) as AsyncCollect[];
   }
 }
