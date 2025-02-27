@@ -32,4 +32,11 @@ export class ServerCompliance<P extends DefaultParams> {
       this.context
     );
   }
+
+  public handleContext() {
+    return this.tradeHandlerFactory.createContext(
+      this.userConfig,
+      this.context
+    );
+  }
 }
