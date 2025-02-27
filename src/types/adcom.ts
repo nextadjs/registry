@@ -8,7 +8,10 @@ export interface AdCOMPlacement extends Placement {
   tagid: string;
 }
 
-export type AdCOMContext = AdCOMContextWithSite | AdCOMContextWithApp | AdCOMContextWithDooh;
+export type AdCOMContext =
+  | AdCOMContextWithSite
+  | AdCOMContextWithApp
+  | AdCOMContextWithDooh;
 
 export interface AdCOMContextWithSite extends Context {
   site: Site;
@@ -34,3 +37,12 @@ export interface AdCOMRegs extends Regs {
     gpp_sid?: number[];
   };
 }
+
+export type {
+  Site as AdCOMSite,
+  App as AdCOMApp,
+  Dooh as AdCOMDooh,
+  User as AdCOMUser,
+  Restrictions as AdCOMRestrictions,
+  Device as AdCOMDevice,
+} from "iab-adcom/context";
