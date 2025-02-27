@@ -1,5 +1,4 @@
 import type { DefaultParams } from "@/types";
-import type { AdCOMContext } from "@/types/adcom";
 import type { ClientCompliance } from "../client-compliance";
 import type { ServerCompliance } from "../server-compliance";
 

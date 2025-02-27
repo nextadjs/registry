@@ -1,4 +1,4 @@
-import type { DefaultParams } from "@/types";
+import type { Context, DefaultParams } from "@/types";
 import type { AdCOMContext } from "@/types/adcom";
 import type {
   V26Bid,
@@ -18,14 +18,14 @@ export interface OpenRTBRequestConfig {
 
 export interface BuyerOpenRTBIntegration<
   P extends DefaultParams,
-  C extends AdCOMContext
+  C extends Context
 > {
   v26?: BuyerOpenRTB26Integration<P, C>;
 }
 
 export interface BuyerOpenRTB26Integration<
   P extends DefaultParams,
-  C extends AdCOMContext
+  C extends Context
 > {
   configureRequest(params: P, context: C): OpenRTBRequestConfig;
   decorateBidRequest?(

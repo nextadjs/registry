@@ -1,7 +1,7 @@
 import type { DefaultParams, Runtime } from "@/types";
 import { loadCompliance } from "./load-compliance";
 import type { Compliance, ComplianceUserConfig } from "./types";
-import type { AdCOMContext } from "@/types/adcom";
+import type { Context } from "@/types";
 import type { ClientCompliance } from "./client-compliance";
 import type { ServerCompliance } from "./server-compliance";
 
@@ -15,7 +15,7 @@ export class ComplianceRegistry {
   public async loadForClient<P extends DefaultParams>(
     name: string,
     userConfig: ComplianceUserConfig<P>,
-    context: AdCOMContext
+    context: Context
   ): Promise<ClientCompliance<P>> {
     return this.load(name, "client", userConfig, context) as Promise<
       ClientCompliance<P>
@@ -25,7 +25,7 @@ export class ComplianceRegistry {
   public async loadForServer<P extends DefaultParams>(
     name: string,
     userConfig: ComplianceUserConfig<P>,
-    context: AdCOMContext
+    context: Context
   ): Promise<ServerCompliance<P>> {
     return this.load(name, "server", userConfig, context) as Promise<
       ServerCompliance<P>
@@ -36,7 +36,7 @@ export class ComplianceRegistry {
     name: string,
     runtime: Runtime,
     userConfig: ComplianceUserConfig<P>,
-    context: AdCOMContext
+    context: Context
   ): Promise<Compliance<P>> {
     const loader = this.modules.get(name);
     // TODO: Errorの例外化

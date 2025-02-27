@@ -1,9 +1,5 @@
 import type {
   AdCOMApp,
-  AdCOMContext,
-  AdCOMContextWithApp,
-  AdCOMContextWithDooh,
-  AdCOMContextWithSite,
   AdCOMDevice,
   AdCOMDooh,
   AdCOMRegs,
@@ -12,37 +8,37 @@ import type {
   AdCOMUser,
 } from "@/types/adcom";
 import type { ComplianceOpenRTBIntegration } from "./openrtb";
-import type { DefaultParams } from "@/types";
+import type { Context, ContextWithApp, ContextWithDooh, ContextWithSite, DefaultParams } from "@/types";
 
 export interface ComplianceClientContextIntegration<T extends DefaultParams> {
   site?: {
-    openrtb: ComplianceOpenRTBIntegration<T, AdCOMContextWithSite>;
+    openrtb: ComplianceOpenRTBIntegration<T, ContextWithSite>;
   };
   app?: {
-    openrtb: ComplianceOpenRTBIntegration<T, AdCOMContextWithApp>;
+    openrtb: ComplianceOpenRTBIntegration<T, ContextWithApp>;
   };
   dooh?: {
-    openrtb: ComplianceOpenRTBIntegration<T, AdCOMContextWithDooh>;
+    openrtb: ComplianceOpenRTBIntegration<T, ContextWithDooh>;
   };
   validateSite(
     site: AdCOMSite,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMSite>;
   validateApp(
     app: AdCOMApp,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMApp>;
   validateDooh(
     dooh: AdCOMDooh,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMDooh>;
   validateUser(
     user: AdCOMUser,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMUser>;
   validateDevice(
     device: AdCOMDevice,
@@ -52,7 +48,7 @@ export interface ComplianceClientContextIntegration<T extends DefaultParams> {
   validateRegs(
     regs: AdCOMRegs,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMRegs>;
   validateRestrictions(
     restrictions: AdCOMRestrictions,
@@ -63,33 +59,33 @@ export interface ComplianceClientContextIntegration<T extends DefaultParams> {
 
 export interface ComplianceServerContextIntegration<T extends DefaultParams> {
   site?: {
-    openrtb: ComplianceOpenRTBIntegration<T, AdCOMContextWithSite>;
+    openrtb: ComplianceOpenRTBIntegration<T, ContextWithSite>;
   };
   app?: {
-    openrtb: ComplianceOpenRTBIntegration<T, AdCOMContextWithApp>;
+    openrtb: ComplianceOpenRTBIntegration<T, ContextWithApp>;
   };
   dooh?: {
-    openrtb: ComplianceOpenRTBIntegration<T, AdCOMContextWithDooh>;
+    openrtb: ComplianceOpenRTBIntegration<T, ContextWithDooh>;
   };
   validateSite(
     site: AdCOMSite,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMSite>;
   validateApp(
     app: AdCOMApp,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMApp>;
   validateDooh(
     dooh: AdCOMDooh,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMDooh>;
   validateUser(
     user: AdCOMUser,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMUser>;
   validateDevice(
     device: AdCOMDevice,
@@ -99,7 +95,7 @@ export interface ComplianceServerContextIntegration<T extends DefaultParams> {
   validateRegs(
     regs: AdCOMRegs,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMRegs>;
   validateRestrictions(
     restrictions: AdCOMRestrictions,

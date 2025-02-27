@@ -1,9 +1,5 @@
 import type {
   AdCOMApp,
-  AdCOMContext,
-  AdCOMContextWithApp,
-  AdCOMContextWithDooh,
-  AdCOMContextWithSite,
   AdCOMDevice,
   AdCOMDooh,
   AdCOMRegs,
@@ -12,37 +8,39 @@ import type {
   AdCOMUser,
 } from "@/types/adcom";
 import type { SignalOpenRTBIntegration } from "./openrtb";
-import type { DefaultParams } from "@/types";
+import type {
+  Context,
+  ContextWithApp,
+  ContextWithDooh,
+  ContextWithSite,
+  DefaultParams,
+} from "@/types";
 
 export interface SignalClientContextIntegration<T extends DefaultParams> {
   site?: {
-    openrtb: SignalOpenRTBIntegration<T, AdCOMContextWithSite>;
+    openrtb: SignalOpenRTBIntegration<T, ContextWithSite>;
   };
   app?: {
-    openrtb: SignalOpenRTBIntegration<T, AdCOMContextWithApp>;
+    openrtb: SignalOpenRTBIntegration<T, ContextWithApp>;
   };
   dooh?: {
-    openrtb: SignalOpenRTBIntegration<T, AdCOMContextWithDooh>;
+    openrtb: SignalOpenRTBIntegration<T, ContextWithDooh>;
   };
   decorateSite(
     site: AdCOMSite,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMSite>;
-  decorateApp(
-    app: AdCOMApp,
-    params: T,
-    context: AdCOMContext
-  ): Promise<AdCOMApp>;
+  decorateApp(app: AdCOMApp, params: T, context: Context): Promise<AdCOMApp>;
   decorateDooh(
     dooh: AdCOMDooh,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMDooh>;
   decorateUser(
     user: AdCOMUser,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMUser>;
   decorateDevice(
     device: AdCOMDevice,
@@ -52,7 +50,7 @@ export interface SignalClientContextIntegration<T extends DefaultParams> {
   decorateRegs(
     regs: AdCOMRegs,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMRegs>;
   decorateRestrictions(
     restrictions: AdCOMRestrictions,
@@ -63,33 +61,29 @@ export interface SignalClientContextIntegration<T extends DefaultParams> {
 
 export interface SignalServerContextIntegration<T extends DefaultParams> {
   site?: {
-    openrtb: SignalOpenRTBIntegration<T, AdCOMContextWithSite>;
+    openrtb: SignalOpenRTBIntegration<T, ContextWithSite>;
   };
   app?: {
-    openrtb: SignalOpenRTBIntegration<T, AdCOMContextWithApp>;
+    openrtb: SignalOpenRTBIntegration<T, ContextWithApp>;
   };
   dooh?: {
-    openrtb: SignalOpenRTBIntegration<T, AdCOMContextWithDooh>;
+    openrtb: SignalOpenRTBIntegration<T, ContextWithDooh>;
   };
   decorateSite(
     site: AdCOMSite,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMSite>;
-  decorateApp(
-    app: AdCOMApp,
-    params: T,
-    context: AdCOMContext
-  ): Promise<AdCOMApp>;
+  decorateApp(app: AdCOMApp, params: T, context: Context): Promise<AdCOMApp>;
   decorateDooh(
     dooh: AdCOMDooh,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMDooh>;
   decorateUser(
     user: AdCOMUser,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMUser>;
   decorateDevice(
     device: AdCOMDevice,
@@ -99,7 +93,7 @@ export interface SignalServerContextIntegration<T extends DefaultParams> {
   decorateRegs(
     regs: AdCOMRegs,
     params: T,
-    context: AdCOMContext
+    context: Context
   ): Promise<AdCOMRegs>;
   decorateRestrictions(
     restrictions: AdCOMRestrictions,

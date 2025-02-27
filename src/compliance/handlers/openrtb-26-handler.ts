@@ -1,23 +1,23 @@
 import type { DefaultParams } from "@/types";
 import type {
-  SignalOpenRTB26Integration,
-  SignalUserConfig,
+  ComplianceOpenRTB26Integration,
+  ComplianceUserConfig,
 } from "../types";
-import type { AdCOMContext } from "@/types/adcom";
+import type { Context } from "@/types";
 import type { V26BidRequest } from "@/types/openrtb";
 
 export class OpenRTB26Handler<
   P extends DefaultParams
 > {
   public constructor(
-    private userConfig: SignalUserConfig<P>,
-    private context: AdCOMContext,
-    private integration?: SignalOpenRTB26Integration<P, AdCOMContext>
+    private userConfig: ComplianceUserConfig<P>,
+    private context: Context,
+    private integration?: ComplianceOpenRTB26Integration<P, Context>
   ) {}
 
-  public decorateBidRequest(bidRequest: Omit<V26BidRequest, 'imp'>) {
-    if (this.integration?.decorateBidRequest) {
-      return this.integration.decorateBidRequest(bidRequest, this.userConfig.params, this.context);
+  public validateBidRequest(bidRequest: Omit<V26BidRequest, 'imp'>) {
+    if (this.integration?.validateBidRequest) {
+      return this.integration.validateBidRequest(bidRequest, this.userConfig.params, this.context);
     }
 
     return bidRequest;

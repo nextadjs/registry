@@ -5,7 +5,7 @@ import type {
   ComplianceUserConfig,
 } from "./types";
 import { ServerCompliance } from "./server-compliance";
-import type { AdCOMContext } from "@/types/adcom";
+import type { Context } from "@/types";
 import { ClientCompliance } from "./client-compliance";
 
 export const loadCompliance = async <
@@ -13,7 +13,7 @@ export const loadCompliance = async <
 >(
   name: string,
   runtime: Runtime,
-  context: AdCOMContext,
+  context: Context,
   userConfig: ComplianceUserConfig<P>
 ) => {
   // TODO: 適切なエラーハンドリング

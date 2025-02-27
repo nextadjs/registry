@@ -1,6 +1,5 @@
-import type { DefaultParams } from "@/types";
+import type { Context, ContextWithApp, ContextWithDooh, ContextWithSite, DefaultParams } from "@/types";
 import { OpenRTBHandler } from "./openrtb-handler";
-import type { AdCOMContext, AdCOMContextWithApp, AdCOMContextWithDooh, AdCOMContextWithSite } from "@/types/adcom";
 import type {
   BuyerIntegration,
   BuyerOpenRTBIntegration,
@@ -12,28 +11,28 @@ export class TradeHandlerFactory<
 > {
   public constructor(private integration: BuyerIntegration<P>) {}
 
-  public createOpenRTB(userConfig: BuyerUserConfig<P>, context: AdCOMContext) {
+  public createOpenRTB(userConfig: BuyerUserConfig<P>, context: Context) {
     if (!this.integration?.openrtb) {
       // TODO: 適切な例外
       throw new Error("OpenRTB integration not found");
     }
 
-    let integration: BuyerOpenRTBIntegration<P, AdCOMContext> = this.integration.openrtb;
+    let integration: BuyerOpenRTBIntegration<P, Context> = this.integration.openrtb;
 
-    if (context?.site && this.integration.context?.site?.openrtb) {
+    if (context.channel === 'site' && this.integration.context?.site?.openrtb) {
       integration = Object.assign(
         this.integration.context.site.openrtb,
         integration
-      ) as BuyerOpenRTBIntegration<P, AdCOMContextWithSite>;
-    } else if (context?.app && this.integration.context?.app?.openrtb) {
+      ) as BuyerOpenRTBIntegration<P, ContextWithSite>;
+    } else if (context.channel === 'app' && this.integration.context?.app?.openrtb) {
       integration = Object.assign(
         this.integration.context.app.openrtb,
         integration
-      ) as BuyerOpenRTBIntegration<P, AdCOMContextWithApp>;
-    } else if (context?.dooh && this.integration.context?.dooh?.openrtb) {
+      ) as BuyerOpenRTBIntegration<P, ContextWithApp>;
+    } else if (context.channel === 'dooh' && this.integration.context?.dooh?.openrtb) {
       integration = Object.assign(
         this.integration.context.dooh.openrtb
-      ) as BuyerOpenRTBIntegration<P, AdCOMContextWithDooh>;
+      ) as BuyerOpenRTBIntegration<P, ContextWithDooh>;
     }
 
     return new OpenRTBHandler<P>(

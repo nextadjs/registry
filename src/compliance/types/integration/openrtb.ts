@@ -1,5 +1,5 @@
 import type { DefaultParams } from "@/types";
-import type { AdCOMContext } from "@/types/adcom";
+import type { Context } from "@/types";
 import type {
   V26Bid,
   V26BidRequest,
@@ -10,14 +10,14 @@ import type {
 
 export interface ComplianceOpenRTBIntegration<
   P extends DefaultParams,
-  C extends AdCOMContext
+  C extends Context
 > {
   v26?: ComplianceOpenRTB26Integration<P, C>;
 }
 
 export interface ComplianceOpenRTB26Integration<
   P extends DefaultParams,
-  C extends AdCOMContext
+  C extends Context
 > {
   validateBidRequest?(
     bidRequest: Omit<V26BidRequest, "imp">,

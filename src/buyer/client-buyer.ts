@@ -1,11 +1,10 @@
-import type { DefaultParams, TradeMethod } from "@/types";
+import type { Context, DefaultParams, TradeMethod } from "@/types";
 import type {
   BuyerClientIntegration,
   BuyerConfig,
   BuyerUserConfig,
 } from "./types";
 import type { OpenRTBHandler } from "./handlers/openrtb-handler";
-import type { AdCOMContext } from "@/types/adcom";
 import { TradeHandlerFactory } from "./handlers/factory";
 
 export class ClientBuyer<P extends DefaultParams> {
@@ -14,7 +13,7 @@ export class ClientBuyer<P extends DefaultParams> {
   public constructor(
     public readonly config: BuyerConfig,
     public readonly userConfig: BuyerUserConfig<P>,
-    public readonly context: AdCOMContext,
+    public readonly context: Context,
     integration: BuyerClientIntegration<P>
   ) {
     this.tradeHandlerFactory = new TradeHandlerFactory<P>(integration);

@@ -1,7 +1,7 @@
 import type { DefaultParams } from "@/types";
 import type {
-  AdCOMContext,
-} from "@/types/adcom";
+  Context,
+} from "@/types";
 import type { ComplianceOpenRTBIntegration } from "./openrtb";
 import type {
   ComplianceClientContextIntegration,
@@ -13,12 +13,12 @@ export type ComplianceIntegration<T extends DefaultParams> =
   | ComplianceServerIntegration<T>;
 
 export interface ComplianceClientIntegration<T extends DefaultParams> {
-  openrtb?: ComplianceOpenRTBIntegration<T, AdCOMContext>;
+  openrtb?: ComplianceOpenRTBIntegration<T, Context>;
   context?: ComplianceClientContextIntegration<T>;
 }
 
 export interface ComplianceServerIntegration<T extends DefaultParams> {
-  openrtb?: ComplianceOpenRTBIntegration<T, AdCOMContext>;
+  openrtb?: ComplianceOpenRTBIntegration<T, Context>;
   context?: ComplianceServerContextIntegration<T>;
 }
 

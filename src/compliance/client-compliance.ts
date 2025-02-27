@@ -5,7 +5,7 @@ import type {
   ComplianceUserConfig,
 } from "./types";
 import type { OpenRTBHandler } from "./handlers/openrtb-handler";
-import type { AdCOMContext } from "@/types/adcom";
+import type { Context } from "@/types";
 import { TradeHandlerFactory } from "./handlers/factory";
 
 export class ClientCompliance<P extends DefaultParams> {
@@ -14,7 +14,7 @@ export class ClientCompliance<P extends DefaultParams> {
   public constructor(
     public readonly config: ComplianceConfig,
     public readonly userConfig: ComplianceUserConfig<P>,
-    public readonly context: AdCOMContext,
+    public readonly context: Context,
     integration: ComplianceClientIntegration<P>
   ) {
     this.tradeHandlerFactory = new TradeHandlerFactory<P>(integration);

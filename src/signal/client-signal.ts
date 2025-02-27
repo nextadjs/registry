@@ -5,7 +5,7 @@ import type {
   SignalUserConfig,
 } from "./types";
 import type { OpenRTBHandler } from "./handlers/openrtb-handler";
-import type { AdCOMContext } from "@/types/adcom";
+import type { Context } from "@/types";
 import { TradeHandlerFactory } from "./handlers/factory";
 
 export class ClientSignal<P extends DefaultParams> {
@@ -14,7 +14,7 @@ export class ClientSignal<P extends DefaultParams> {
   public constructor(
     public readonly config: SignalConfig,
     public readonly userConfig: SignalUserConfig<P>,
-    public readonly context: AdCOMContext,
+    public readonly context: Context,
     integration: SignalClientIntegration<P>
   ) {
     this.tradeHandlerFactory = new TradeHandlerFactory<P>(integration);

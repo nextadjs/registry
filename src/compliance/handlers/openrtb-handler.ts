@@ -1,13 +1,13 @@
 import type { DefaultParams } from "@/types";
 import type { ComplianceOpenRTBIntegration, ComplianceUserConfig } from "../types";
-import type { AdCOMContext } from "@/types/adcom";
+import type { Context } from "@/types";
 import { OpenRTB26Handler } from "./openrtb-26-handler";
 
 export class OpenRTBHandler<P extends DefaultParams> {
   public constructor(
     private userConfig: ComplianceUserConfig<P>,
-    private context: AdCOMContext,
-    private integration: ComplianceOpenRTBIntegration<P, AdCOMContext>
+    private context: Context,
+    private integration: ComplianceOpenRTBIntegration<P, Context>
   ) {}
 
   public handleV26() {

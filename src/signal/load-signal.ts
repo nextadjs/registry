@@ -5,7 +5,7 @@ import type {
   SignalUserConfig,
 } from "./types";
 import { ServerSignal } from "./server-signal";
-import type { AdCOMContext } from "@/types/adcom";
+import type { Context } from "@/types";
 import { ClientSignal } from "./client-signal";
 
 export const loadSignal = async <
@@ -13,7 +13,7 @@ export const loadSignal = async <
 >(
   name: string,
   runtime: Runtime,
-  context: AdCOMContext,
+  context: Context,
   userConfig: SignalUserConfig<P>
 ) => {
   // TODO: 適切なエラーハンドリング

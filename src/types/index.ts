@@ -1,6 +1,27 @@
+import type {
+  AdCOMContextWithApp,
+  AdCOMContextWithDooh,
+  AdCOMContextWithSite,
+} from "./adcom";
+
 export type Runtime = "client" | "server";
 
 export interface DefaultParams {}
+
+export type Context = ContextWithSite | ContextWithApp | ContextWithDooh;
+
+export type ContextWithSite = {
+    channel: "site";
+    source: AdCOMContextWithSite;
+};
+export type ContextWithApp = {
+    channel: "app";
+    source: AdCOMContextWithSite;
+};
+export type ContextWithDooh = {
+    channel: "dooh";
+    source: AdCOMContextWithDooh;
+};
 
 export type Channel = "site" | "app" | "dooh";
 

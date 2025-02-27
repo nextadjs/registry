@@ -1,7 +1,6 @@
-import type { DefaultParams, Runtime } from "@/types";
+import type { Context, DefaultParams, Runtime } from "@/types";
 import type { BuyerClientIntegration, BuyerServerIntegration, BuyerUserConfig } from "./types";
 import { ServerBuyer } from "./server-buyer";
-import type { AdCOMContext } from "@/types/adcom";
 import { ClientBuyer } from "./client-buyer";
 
 export const loadBuyer = async <
@@ -9,7 +8,7 @@ export const loadBuyer = async <
 >(
   name: string,
   runtime: Runtime,
-  context: AdCOMContext,
+  context: Context,
   userConfig: BuyerUserConfig<P>
 ) => {
   // TODO: 適切なエラーハンドリング

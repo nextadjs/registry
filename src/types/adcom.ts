@@ -15,19 +15,22 @@ export type AdCOMContext =
 
 export interface AdCOMContextWithSite extends Context {
   site: Site;
-  dooh: never;
-  app: never;
+  dooh?: never;
+  app?: never;
+  regs?: AdCOMRegs;
 }
 export interface AdCOMContextWithApp extends Context {
-  site: never;
-  dooh: never;
+  site?: never;
+  dooh?: never;
   app: App;
+  regs?: AdCOMRegs;
 }
 
 export interface AdCOMContextWithDooh extends Context {
-  site: never;
+  site?: never;
   dooh: Dooh;
-  app: never;
+  app?: never;
+  regs?: AdCOMRegs;
 }
 
 export interface AdCOMRegs extends Regs {

@@ -1,7 +1,6 @@
-import type { DefaultParams, Runtime } from "@/types";
+import type { Context, DefaultParams, Runtime } from "@/types";
 import { loadBuyer } from "./load-buyer";
 import type { Buyer, BuyerUserConfig } from "./types";
-import type { AdCOMContext } from "@/types/adcom";
 import type { ClientBuyer } from "./client-buyer";
 import type { ServerBuyer } from "./server-buyer";
 
@@ -15,7 +14,7 @@ export class BuyerRegistry {
   public async loadForClient<P extends DefaultParams>(
     name: string,
     userConfig: BuyerUserConfig<P>,
-    context: AdCOMContext
+    context: Context
   ): Promise<ClientBuyer<P>> {
     return this.load(name, "client", userConfig, context) as Promise<
       ClientBuyer<P>
@@ -25,7 +24,7 @@ export class BuyerRegistry {
   public async loadForServer<P extends DefaultParams>(
     name: string,
     userConfig: BuyerUserConfig<P>,
-    context: AdCOMContext
+    context: Context
   ): Promise<ServerBuyer<P>> {
     return this.load(name, "server", userConfig, context) as Promise<
       ServerBuyer<P>
@@ -36,7 +35,7 @@ export class BuyerRegistry {
     name: string,
     runtime: Runtime,
     userConfig: BuyerUserConfig<P>,
-    context: AdCOMContext
+    context: Context
   ): Promise<Buyer<P>> {
     const loader = this.modules.get(name);
     // TODO: Errorの例外化
