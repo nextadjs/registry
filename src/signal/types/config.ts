@@ -19,7 +19,7 @@ export interface SignalConfig {
 export interface SignalCapabilities {
   runtime: Runtime[];
   context: {
-    channel: Channel[];
+    supported_channel: Channel[];
   },
   trade: {
     supported_method: TradeMethod[];

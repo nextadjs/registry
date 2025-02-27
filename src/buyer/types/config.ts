@@ -17,7 +17,7 @@ export interface BuyerConfig {
 export interface BuyerCapabilities {
   runtime: Runtime[];
   context: {
-    channel: Channel[];
+    supported_channel: Channel[];
   },
   trade: {
     supported_method: TradeMethod[];

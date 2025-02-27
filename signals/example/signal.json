@@ -2,6 +2,9 @@
   "name": "example",
   "type": "identity",
   "capabilities": {
+    "context": {
+      "supported_channel": ["site"]
+    },
     "runtime": [
       "client"
     ],
