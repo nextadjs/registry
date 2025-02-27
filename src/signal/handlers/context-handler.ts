@@ -10,7 +10,7 @@ export class ContextHandler<D, P extends DefaultParams> {
     private integration?: SignalAdCOMContextIntegration<D, P>
   ) {}
 
-  public async decorateSite(site: AdCOMSite): Promise<AdCOMSite> {
+  public  decorateSite(site: AdCOMSite): AdCOMSite {
     if (this.integration?.decorateSite) {
       return this.integration.decorateSite(
         site,

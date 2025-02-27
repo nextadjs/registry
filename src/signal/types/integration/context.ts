@@ -48,36 +48,36 @@ export interface SignalAdCOMContextIntegration<D, T extends DefaultParams> {
     data: D,
     params: T,
     context: Context
-  ): Promise<AdCOMSite>;
-  decorateApp(app: AdCOMApp, data: D, params: T, context: Context): Promise<AdCOMApp>;
+  ): AdCOMSite;
+  decorateApp(app: AdCOMApp, data: D, params: T, context: Context): AdCOMApp;
   decorateDooh(
     dooh: AdCOMDooh,
     data: D,
     params: T,
     context: Context
-  ): Promise<AdCOMDooh>;
+  ): AdCOMDooh;
   decorateUser(
     user: AdCOMUser,
     data: D,
     params: T,
     context: Context
-  ): Promise<AdCOMUser>;
+  ): AdCOMUser;
   decorateDevice(
     device: AdCOMDevice,
     data: D,
     params: T,
     context: AdCOMDevice
-  ): Promise<AdCOMDevice>;
+  ): AdCOMDevice;
   decorateRegs(
     regs: AdCOMRegs,
     data: D,
     params: T,
     context: Context
-  ): Promise<AdCOMRegs>;
+  ): AdCOMRegs;
   decorateRestrictions(
     restrictions: AdCOMRestrictions,
     data: D,
     params: T,
     context: AdCOMRestrictions
-  ): Promise<AdCOMRestrictions>;
+  ): AdCOMRestrictions;
 }

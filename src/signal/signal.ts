@@ -1,4 +1,4 @@
-import type { Context, DefaultParams } from "@/types";
+import type { Context, DefaultParams, Runtime } from "@/types";
 import type {
   AsyncCollect,
   SignalConfig,
@@ -11,6 +11,7 @@ export abstract class Signal<
   I extends SignalIntegration<D, P>,
   P extends DefaultParams
 > {
+  public abstract readonly runtime: Runtime;
   protected data!: D;
   protected asyncCollections: AsyncCollect[] = [];
   protected tradeHandlerFactory: TradeHandlerFactory<D, P>;

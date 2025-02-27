@@ -1,8 +1,5 @@
-import type { DefaultParams, TradeMethod } from "@/types";
-import type {
-  ClientAsyncCollect,
-  SignalClientIntegration,
-} from "./types";
+import type { DefaultParams, Runtime, TradeMethod } from "@/types";
+import type { SignalClientIntegration } from "./types";
 import { Signal } from "./signal";
 
 export class ClientSignal<D, P extends DefaultParams> extends Signal<
@@ -10,6 +7,8 @@ export class ClientSignal<D, P extends DefaultParams> extends Signal<
   SignalClientIntegration<D, P>,
   P
 > {
+  public readonly runtime: Runtime = "client";
+
   public handleTrade(tradeMethod: TradeMethod) {
     switch (tradeMethod) {
       case "OpenRTB v2.6":

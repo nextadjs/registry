@@ -1,4 +1,4 @@
-import type { DefaultParams, TradeMethod } from "@/types";
+import type { DefaultParams, Runtime, TradeMethod } from "@/types";
 import type {
   ServerAsyncCollect,
   SignalServerIntegration,
@@ -10,6 +10,8 @@ export class ServerSignal<D, P extends DefaultParams> extends Signal<
   SignalServerIntegration<D, P>,
   P
 > {
+  public readonly runtime: Runtime = 'server';
+
   public handleTrade(tradeMethod: TradeMethod) {
     switch (tradeMethod) {
       case "OpenRTB v2.6":
