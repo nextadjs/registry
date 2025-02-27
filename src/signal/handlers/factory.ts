@@ -1,21 +1,44 @@
 import type { DefaultParams } from "@/types";
 import { OpenRTBHandler } from "./openrtb-handler";
 import type { AdCOMContext } from "@/types/adcom";
-import type { SignalIntegration, SignalUserConfig } from "../types";
+import type {
+  SignalIntegration,
+  SignalOpenRTBIntegration,
+  SignalUserConfig,
+} from "../types";
 
 export class TradeHandlerFactory<
-  T1 extends DefaultParams,
-  T2 extends AdCOMContext
+  P extends DefaultParams,
+  C extends AdCOMContext
 > {
-  public constructor(private integration: SignalIntegration<T1>) {}
+  public constructor(private integration: SignalIntegration<P>) {}
 
-  public createOpenRTB(userConfig: SignalUserConfig<T1>, context: T2) {
+  public createOpenRTB(userConfig: SignalUserConfig<P>, context: C) {
     if (!this.integration?.openrtb) {
       // TODO: 適切な例外
       throw new Error("OpenRTB integration not found");
     }
 
-    return new OpenRTBHandler<T1, T2>(
+    let integration: SignalOpenRTBIntegration<P, C> = this.integration.openrtb;
+
+    if (context?.site && this.integration.context?.site?.openrtb) {
+      integration = Object.assign(
+        this.integration.context?.site?.openrtb,
+        integration
+      ) as SignalOpenRTBIntegration<P, C>;
+    } else if (context?.app && this.integration.context?.app?.openrtb) {
+      integration = Object.assign(
+        this.integration.context.app.openrtb,
+        integration
+      ) as SignalOpenRTBIntegration<P, C>;
+    } else if (context?.dooh && this.integration.context?.dooh?.openrtb) {
+      integration = Object.assign(
+        this.integration.context.dooh.openrtb,
+        integration
+      ) as SignalOpenRTBIntegration<P, C>;
+    }
+
+    return new OpenRTBHandler<P, C>(
       userConfig,
       context,
       this.integration.openrtb
