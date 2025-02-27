@@ -1,13 +1,10 @@
-import type { AdCOMContext } from "./adcom";
-
 export type Runtime = "client" | "server";
-
-export type LoaderFn<T1, T2 extends AdCOMContext> = (runtime: Runtime, config: UserConfig, context: T2) => Promise<T1>;
 
 export interface DefaultParams {}
 
 export type Context = "site" | "app" | "dooh";
 
-export type TradeMethod = "OpenRTB" | "Prebid";
+// 取引方法はラインタイム関係なく並列で管理するため、PrebidはPrebid Serverと明確に分離するためにPrebid.jsにする
+export type TradeMethod = "OpenRTB" | "Prebid.js";
 
 export interface UserConfig {}
