@@ -11,11 +11,15 @@ import type {
   ComplianceUserConfig,
 } from "../types";
 import { OpenRTB26Handler } from "./openrtb-26-handler";
+import { ContextHandler } from "./context-handler";
 
 export class TradeHandlerFactory<P extends DefaultParams> {
   public constructor(private integration: ComplianceIntegration<P>) {}
 
-  public createOpenRTBv26(userConfig: ComplianceUserConfig<P>, context: Context) {
+  public createOpenRTBv26(
+    userConfig: ComplianceUserConfig<P>,
+    context: Context
+  ) {
     if (!this.integration?.openrtbV26) {
       // TODO: 適切な例外
       throw new Error("OpenRTB integration not found");
@@ -55,5 +59,9 @@ export class TradeHandlerFactory<P extends DefaultParams> {
       context,
       this.integration.openrtbV26
     );
+  }
+
+  public createContext(userConfig: ComplianceUserConfig<P>, context: Context) {
+    return new ContextHandler<P>(userConfig, context, this.integration.context);
   }
 }

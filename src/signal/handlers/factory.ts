@@ -11,6 +11,7 @@ import type {
   SignalUserConfig,
 } from "../types";
 import { OpenRTB26Handler } from "./openrtb-26-handler";
+import { ContextHandler } from "./context-handler";
 
 export class TradeHandlerFactory<P extends DefaultParams> {
   public constructor(private integration: SignalIntegration<P>) {}
@@ -55,5 +56,9 @@ export class TradeHandlerFactory<P extends DefaultParams> {
       context,
       this.integration.openrtbV26
     );
+  }
+
+  public createContext(userConfig: SignalUserConfig<P>, context: Context) {
+    return new ContextHandler<P>(userConfig, context, this.integration.context);
   }
 }
