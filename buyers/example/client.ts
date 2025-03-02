@@ -1,12 +1,6 @@
 import type { BuyerClientIntegration } from "@/buyer";
-import type { DefaultParams } from "@/types";
+import type { Params } from "./types";
 
-interface Params extends DefaultParams {
-    site: number;
-};
-
-const integration: BuyerClientIntegration<Params> = {
-
-};
+const integration: BuyerClientIntegration<Params> = {};
 
 export default integration;

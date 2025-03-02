@@ -1,12 +1,6 @@
 import type { ComplianceClientIntegration } from "@/compliance";
-import type { DefaultParams } from "@/types";
+import type { Params } from "./types";
 
-interface Params extends DefaultParams {
-    site: number;
-};
-
-const integration: ComplianceClientIntegration<Params> = {
-
-};
+const integration: ComplianceClientIntegration<Params> = {};
 
 export default integration;

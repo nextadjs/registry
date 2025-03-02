@@ -6,15 +6,10 @@
       "supported_channel": ["site"]
     },
     "runtime": [
-      "client"
-    ],
+     "client"
+    ], 
     "supported_method": [
-      "OpenRTB"
-    ],
-    "openrtb": {
-      "supported_version": [
-        "v2.6"
-      ]
-    }
+      "OpenRTB v2.6"
+    ]
   }
 }
