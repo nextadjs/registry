@@ -2,7 +2,9 @@
   "name": "example",
   "capabilities": {
     "context": {
-      "supported_channel": ["site"]
+      "channel": [
+        "site"
+      ]
     },
     "runtime": [
       "client"

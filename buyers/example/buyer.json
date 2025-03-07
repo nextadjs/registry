@@ -2,18 +2,26 @@
   "name": "example",
   "capabilities": {
     "context": {
-      "supported_channel": ["site"]
+      "channel": [
+        "site"
+      ]
     },
     "runtime": [
       "client"
     ],
-    "supported_method": [
-      "OpenRTB"
-    ],
-    "openrtb": {
-      "supported_version": [
-        "v2.6"
-      ]
+    "trade": {
+      "method": [
+        "OpenRTB v2.6"
+      ],
+      "openrtbV26": {
+        "supported_media": {
+          "banner": true,
+          "video": true,
+          "native": true,
+          "audio": false,
+          "multi_format": false
+        }
+      }
     }
   }
 }

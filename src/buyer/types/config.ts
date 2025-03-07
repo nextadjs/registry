@@ -17,17 +17,17 @@ export interface BuyerConfig {
 export interface BuyerCapabilities {
   runtime: Runtime[];
   context: {
-    supported_channel: Channel[];
-  },
+    channel: Channel[];
+  };
   trade: {
-    supported_method: TradeMethod[];
-    openrtb?: {
-      supported_version: OpenRTBVersion[];
+    method: TradeMethod[];
+    openrtbV26: {
       supported_media: {
-        banner: boolean;
-        video: boolean;
-        native: boolean;
-        audio: boolean;
+        multi_format?: boolean;
+        banner?: boolean;
+        video?: boolean;
+        native?: boolean;
+        audio?: boolean;
       };
     };
   };
