@@ -11,11 +11,9 @@ const integration: BuyerClientIntegration<Params> = {
           };
         },
         decorateBidRequest(bidRequest, params, context) {
-          bidRequest.site = {
-            ext: {
-              michao: {
-                site: params.site.toString(),
-              },
+          bidRequest.site.ext = {
+            michao: {
+              site: params.site.toString(),
             },
           };
 
