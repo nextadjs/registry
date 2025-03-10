@@ -12,8 +12,7 @@ export type BuyerIntegration<T extends DefaultParams> =
   | BuyerServerIntegration<T>;
 
 export interface BuyerClientIntegration<T extends DefaultParams> {
-  openrtbV26?: BuyerOpenRTB26Integration<T, Context>;
-  context?: {
+  channel?: {
     site?: {
       openrtbV26?: BuyerOpenRTB26Integration<T, ContextWithSite>;
     };
@@ -28,7 +27,7 @@ export interface BuyerClientIntegration<T extends DefaultParams> {
 
 export interface BuyerServerIntegration<T extends DefaultParams> {
   openrtbV26?: BuyerOpenRTB26Integration<T, Context>;
-  context?: {
+  channel?: {
     site?: {
       openrtbV26?: BuyerOpenRTB26Integration<T, ContextWithSite>;
     };

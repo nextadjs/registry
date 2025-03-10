@@ -3,9 +3,9 @@ import type {
   Context,
 } from "@/types";
 import type {
-  SignalClientContextIntegration,
-  SignalServerContextIntegration,
-} from "./context";
+  SignalClientChannelIntegration,
+  SignalServerChannelIntegration,
+} from "./channel";
 import type { SignalOpenRTB26Integration } from "./openrtb";
 import type { ClientAsyncCollect, CollectResult, ServerAsyncCollect } from "./collect";
 
@@ -16,15 +16,15 @@ export type SignalIntegration<D, T extends DefaultParams> =
 export interface SignalClientIntegration<D, T extends DefaultParams> {
   collect(): Promise<CollectResult<D, ClientAsyncCollect>>;
   openrtbV26?: SignalOpenRTB26Integration<D, T, Context>;
-  context?: SignalClientContextIntegration<D, T>;
+  channel?: SignalClientChannelIntegration<D, T>;
 }
 
 export interface SignalServerIntegration<D, T extends DefaultParams> {
   collect(): Promise<CollectResult<D, ServerAsyncCollect>>;
   openrtbV26?: SignalOpenRTB26Integration<D, T, Context>;
-  context?: SignalServerContextIntegration<D, T>;
+  channel?: SignalServerChannelIntegration<D, T>;
 }
 
 export * from "./openrtb";
-export * from './context';
+export * from './channel';
 export * from './collect';

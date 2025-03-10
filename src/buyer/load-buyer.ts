@@ -1,5 +1,6 @@
 import type { Context, DefaultParams, Runtime } from "@/types";
 import type {
+  Buyer,
   BuyerClientIntegration,
   BuyerServerIntegration,
   BuyerUserConfig,
@@ -12,7 +13,7 @@ export const loadBuyer = async <P extends DefaultParams>(
   runtime: Runtime,
   context: Context,
   userConfig: BuyerUserConfig<P>
-) => {
+): Promise<Buyer<P>> => {
   // TODO: 適切なエラーハンドリング
   try {
     if (runtime === "server") {
@@ -26,7 +27,6 @@ export const loadBuyer = async <P extends DefaultParams>(
       const config = await import(`@buyers/${name}/buyer.json`);
       return new ClientBuyer(config, userConfig, context, integration);
     }
-  } catch (error) {
-    throw new Error();
-  }
+  } catch (error) {}
+  throw new Error();
 };

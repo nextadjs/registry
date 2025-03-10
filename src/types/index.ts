@@ -5,6 +5,8 @@ import type {
 
 export type Runtime = "client" | "server";
 
+export type Mode = 'development' | 'production';
+
 export interface DefaultParams {}
 
 export type Context = ContextWithSite | ContextWithApp | ContextWithDooh;

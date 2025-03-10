@@ -37,5 +37,6 @@ export interface ComplianceCapabilities {
 
 export interface ComplianceUserConfig<T extends DefaultParams = DefaultParams>
   extends UserConfig {
+  runtime: Runtime;
   params: T;
 }

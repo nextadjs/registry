@@ -37,5 +37,6 @@ export interface SignalCapabilities {
 
 export interface SignalUserConfig<T extends DefaultParams = DefaultParams>
   extends UserConfig {
+  runtime: Runtime;
   params: T;
 }

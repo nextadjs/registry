@@ -16,7 +16,7 @@ import type {
 } from "@/types";
 import type { ComplianceOpenRTB26Integration } from "./openrtb";
 
-export interface ComplianceClientContextIntegration<T extends DefaultParams> extends ComplianceAdCOMContextIntegration<T> {
+export interface ComplianceClientChannelIntegration<T extends DefaultParams> extends ComplianceAdCOMChannelIntegration<T> {
   site?: {
     openrtbV26?: ComplianceOpenRTB26Integration<T, ContextWithSite>;
   };
@@ -28,7 +28,7 @@ export interface ComplianceClientContextIntegration<T extends DefaultParams> ext
   };
 }
 
-export interface ComplianceServerContextIntegration<T extends DefaultParams> extends ComplianceAdCOMContextIntegration<T> {
+export interface ComplianceServerChannelIntegration<T extends DefaultParams> extends ComplianceAdCOMChannelIntegration<T> {
   site?: {
     openrtbV26?: ComplianceOpenRTB26Integration<T, ContextWithSite>;
   };
@@ -40,7 +40,7 @@ export interface ComplianceServerContextIntegration<T extends DefaultParams> ext
   };
 }
 
-export interface ComplianceAdCOMContextIntegration<T extends DefaultParams> {
+export interface ComplianceAdCOMChannelIntegration<T extends DefaultParams> {
   validateSite(
     site: AdCOMSite,
     params: T,

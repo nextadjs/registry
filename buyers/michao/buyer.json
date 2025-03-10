@@ -1,0 +1,31 @@
+{
+  "name": "michao",
+
+  "capabilities": {
+    "context": {
+      "channel": [
+        "site"
+      ]
+    },
+    "runtime": [
+      "client"
+    ],
+    "mode": [
+      "development"
+    ],
+    "trade": {
+      "method": [
+        "OpenRTB v2.6"
+      ],
+      "openrtbV26": {
+        "supported_media": {
+          "banner": true,
+          "video": true,
+          "native": true,
+          "audio": false,
+          "multi_format": false
+        }
+      }
+    }
+  }
+}

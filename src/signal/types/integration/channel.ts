@@ -16,8 +16,8 @@ import type {
 } from "@/types";
 import type { SignalOpenRTB26Integration } from "./openrtb";
 
-export interface SignalClientContextIntegration<D, T extends DefaultParams>
-  extends SignalAdCOMContextIntegration<D, T> {
+export interface SignalClientChannelIntegration<D, T extends DefaultParams>
+  extends SignalAdCOMChannelIntegration<D, T> {
   site?: {
     openrtbV26?: SignalOpenRTB26Integration<D, T, ContextWithSite>;
   };
@@ -29,8 +29,8 @@ export interface SignalClientContextIntegration<D, T extends DefaultParams>
   };
 }
 
-export interface SignalServerContextIntegration<D, T extends DefaultParams>
-  extends SignalAdCOMContextIntegration<D, T> {
+export interface SignalServerChannelIntegration<D, T extends DefaultParams>
+  extends SignalAdCOMChannelIntegration<D, T> {
   site?: {
     openrtbV26?: SignalOpenRTB26Integration<D, T, ContextWithSite>;
   };
@@ -42,7 +42,7 @@ export interface SignalServerContextIntegration<D, T extends DefaultParams>
   };
 }
 
-export interface SignalAdCOMContextIntegration<D, T extends DefaultParams> {
+export interface SignalAdCOMChannelIntegration<D, T extends DefaultParams> {
   decorateSite(
     site: AdCOMSite,
     data: D,

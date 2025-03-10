@@ -1,6 +1,7 @@
 import type {
   Channel,
   DefaultParams,
+  Mode,
   Runtime,
   TradeMethod,
   UserConfig,
@@ -16,6 +17,7 @@ export interface BuyerConfig {
 
 export interface BuyerCapabilities {
   runtime: Runtime[];
+  mode: Mode[];
   context: {
     channel: Channel[];
   };
@@ -35,5 +37,6 @@ export interface BuyerCapabilities {
 
 export interface BuyerUserConfig<T extends DefaultParams = DefaultParams>
   extends UserConfig {
+  runtime: Runtime;
   params: T;
 }

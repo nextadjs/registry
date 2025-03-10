@@ -3,9 +3,9 @@ import type {
   Context,
 } from "@/types";
 import type {
-  ComplianceClientContextIntegration,
-  ComplianceServerContextIntegration,
-} from "./context";
+  ComplianceClientChannelIntegration,
+  ComplianceServerChannelIntegration,
+} from "./channel";
 import type { ComplianceOpenRTB26Integration } from "./openrtb";
 
 export type ComplianceIntegration<T extends DefaultParams> =
@@ -14,13 +14,13 @@ export type ComplianceIntegration<T extends DefaultParams> =
 
 export interface ComplianceClientIntegration<T extends DefaultParams> {
   openrtbV26?: ComplianceOpenRTB26Integration<T, Context>;
-  context?: ComplianceClientContextIntegration<T>;
+  channel?: ComplianceClientChannelIntegration<T>;
 }
 
 export interface ComplianceServerIntegration<T extends DefaultParams> {
   openrtbV26?: ComplianceOpenRTB26Integration<T, Context>;
-  context?: ComplianceServerContextIntegration<T>;
+  channel?: ComplianceServerChannelIntegration<T>;
 }
 
 export * from "./openrtb";
-export * from './context';
+export * from './channel';
